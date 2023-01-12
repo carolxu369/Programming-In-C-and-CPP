@@ -1,0 +1,143 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+#include "map.h"
+
+template<typename K, typename V>
+class BstMap : public Map<K, V> {
+ private:
+  class Node {
+   public:
+    K key;
+    V value;
+    Node * left;
+    Node * right;
+    // constructor
+    Node() : key(0), value(0), left(NULL), right(NULL) {}
+    Node(K k, V v) : key(k), value(v), left(NULL), right(NULL) {}
+  };
+
+  Node * root;
+
+ public:
+  // constructor
+  BstMap<K, V>() : root(NULL) {}
+
+  // copy constructor
+  BstMap(const BstMap & rhs) : root(NULL) { root = constructor(rhs.root); }
+
+  Node * constructor(Node * curr_node) {
+    if (curr_node == NULL) {
+      return NULL;
+    }
+    Node * new_node = new Node(curr_node->key, curr_node->value);
+    new_node->left = constructor(curr_node->left);
+    new_node->right = constructor(curr_node->right);
+    return new_node;
+  }
+
+  // assignment constructor
+  BstMap & operator=(const BstMap & rhs) {
+    if (this != &rhs) {
+      destructor(root);
+      root = constructor(rhs.root);
+    }
+    return *this;
+  }
+
+  // add
+  virtual void add(const K & key, const V & value) {
+    Node ** curr_node = &root;
+    while (*curr_node != NULL) {
+      if ((*curr_node)->key == key) {
+        (*curr_node)->value = value;
+        return;
+      }
+      else if ((*curr_node)->key > key) {
+        curr_node = &(*curr_node)->left;
+      }
+      else if ((*curr_node)->key < key) {
+        curr_node = &(*curr_node)->right;
+      }
+    }
+    *curr_node = new Node(key, value);
+  }
+
+  // lookup
+  virtual const V & lookup(const K & key) const throw(std::invalid_argument) {
+    Node * curr_node = root;
+    while (curr_node != NULL) {
+      if (curr_node->key == key) {
+        return curr_node->value;
+      }
+      else if (curr_node->key > key) {
+        curr_node = curr_node->left;
+      }
+      else if (curr_node->key < key) {
+        curr_node = curr_node->right;
+      }
+    }
+
+    // otherwise throw an exception
+    throw std::invalid_argument("The key is not found.\n");
+  }
+
+  // remove
+  virtual void remove(const K & key) {
+    Node ** curr_node = &root;
+    Node * temp = NULL;
+
+    while (*curr_node != NULL) {
+      if ((*curr_node)->key == key) {
+        if ((*curr_node)->left == NULL) {
+          temp = (*curr_node)->right;
+          delete *curr_node;
+          *curr_node = temp;
+        }
+
+        else if ((*curr_node)->right == NULL) {
+          temp = (*curr_node)->left;
+          delete *curr_node;
+          *curr_node = temp;
+        }
+
+        else {
+          Node ** new_node = curr_node;
+          curr_node = &(*curr_node)->left;
+          while ((*curr_node)->right != NULL) {
+            curr_node = &(*curr_node)->right;
+          }
+
+          (*new_node)->key = (*curr_node)->key;
+          (*new_node)->value = (*curr_node)->value;
+          temp = (*curr_node)->left;
+          delete (*curr_node);
+          *curr_node = temp;
+        }
+      }
+
+      else if ((*curr_node)->key > key) {
+        curr_node = &(*curr_node)->left;
+      }
+      else {
+        curr_node = &(*curr_node)->right;
+      }
+    }
+  }
+  //virtual ~Map<K,V>() {}
+
+  void destructor(Node * curr_node) {
+    if (curr_node != NULL) {
+      destructor(curr_node->left);
+      destructor(curr_node->right);
+      delete curr_node;
+    }
+  }
+
+  ~BstMap<K, V>() { destructor(root); }
+};

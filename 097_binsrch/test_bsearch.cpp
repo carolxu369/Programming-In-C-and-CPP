@@ -1,0 +1,92 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+#include "function.h"
+
+class CountedIntFn : public Function<int, int> {
+ protected:
+  unsigned remaining;
+  Function<int, int> * f;
+  const char * mesg;
+
+ public:
+  CountedIntFn(unsigned n, Function<int, int> * fn, const char * m) :
+      remaining(n), f(fn), mesg(m) {}
+  virtual int invoke(int arg) {
+    if (remaining == 0) {
+      fprintf(stderr, "Too many function invocations in %s\n", mesg);
+      exit(EXIT_FAILURE);
+    }
+    remaining--;
+    return f->invoke(arg);
+  }
+};
+
+int binarySearchForZero(Function<int, int> * f, int low, int high);
+
+void check(Function<int, int> * f,
+           int low,
+           int high,
+           int expected_ans,
+           const char * mesg) {
+  int n = 0;
+  if (high > low) {
+    n = log2(high - low) + 1;
+  }
+  else {
+    n = 1;
+  }
+
+  CountedIntFn * function = new CountedIntFn(n, f, mesg);
+
+  int result = binarySearchForZero(function, low, high);
+  if (result != expected_ans) {
+    std::cerr << "The result is different from the expected answer.\n";
+    exit(EXIT_FAILURE);
+  }
+}
+class Sin : public Function<int, int> {
+ public:
+  virtual int invoke(int arg) { return 10000000 * (sin(arg / 100000.0) - 0.5); }
+};
+
+class Negative : public Function<int, int> {
+ public:
+  virtual int invoke(int arg) { return (-1) * arg; }
+};
+
+class Positive : public Function<int, int> {
+ public:
+  virtual int invoke(int arg) { return arg; }
+};
+
+int main() {
+  Sin * s = new Sin();
+  Negative * n = new Negative();
+  Positive * p = new Positive();
+
+  // sin
+  check(s, 0, 150000, 52359, "sin");
+  check(s, 1, 1, 1, "(1, 1)");
+  check(s, -1, -1, -1, "(-1, -1)");
+  check(s, 0, 0, 0, "(0, 0)");
+
+  // negative
+  check(n, 0, 0, 0, "(0, 0)");
+
+  // positive
+  check(p, 10, 1000, 10, "positive");
+  check(p, -5, 5, 0, "(l+h)/2 = 0");
+  check(p, -2, 8, 0, "positive");
+  check(p, -10, 9, 0, "negative");
+  check(p, 0, 0, 0, "(0, 0)");
+  check(p, -10000000, 100000, 0, "positive");
+  check(p, -10000000, -2, -3, "positive");
+
+  return EXIT_SUCCESS;
+}

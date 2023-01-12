@@ -1,0 +1,83 @@
+#include <ctype.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "rand_story.h"
+// use the header files from eval 1
+
+// story-step 1
+int main(int argc, char ** argv) {
+  // check whether we only have one command line argument
+  if (argc != 2) {
+    perror("The number of command line arguments entered is wrong.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // open the file for reading and check the corresponding error
+  FILE * f = fopen(argv[1], "r");
+  if (f == NULL) {
+    perror("The file cannot be opened.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // use getline to operate on each line of the file
+  size_t sz = 0;
+  char * line = NULL;
+  while (getline(&line, &sz, f) >= 0) {
+    size_t len = strlen(line);
+
+    // first check whether the number of underscores is enough to make valid blanks
+    int _count = 0;
+    for (size_t i = 0; i < len; i++) {
+      if (line[i] == '_') {
+        _count++;
+      }
+    }
+    if ((_count % 2) != 0) {
+      perror("Some blanks begin but not end with matching underscores.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    // print each character in the line with blanks replaced
+    char * ptr = line;
+    while (*ptr != '\0') {
+      // if find a starting underscore, declare an empty string using realloc to store the category name until meeting the closing underscore
+      if (*ptr == '_') {
+        char * cat_name = NULL;
+        // declare a count to record the size change of the cat_name
+        size_t count = 0;
+        cat_name = realloc(cat_name, count * sizeof(*cat_name));
+        // first concatenate the cat_name with an empty string in the case if the starting underscore and closing underscore are adjacent
+        // get this idea of strcat from MLP 057
+        char * empty_cat = "";
+        strcat(cat_name, empty_cat);
+        ptr++;
+        // use another loop to find the closing underscore
+        while (*ptr != '_') {
+          // increase the cat_name size to store the new character
+          count++;
+          cat_name = realloc(cat_name, count * sizeof(*cat_name));
+          // convert the single character to string to do the following strcat
+          // to add the character to the cat_name
+          char curr_str[2] = {*ptr, '\0'};
+          strcat(cat_name, curr_str);
+          ptr++;
+        }
+        // use the chooseWord function to choose one word from cat_name
+        const char * word = chooseWord(cat_name, NULL);
+        printf("%s", word);
+        // free th realloc memory taken by cat_name
+        free(cat_name);
+        ptr++;
+      }
+      else {
+        // if the character is not in the category name, then just print the character
+        printf("%c", *ptr);
+        ptr++;
+      }
+    }
+  }
+  free(line);
+}

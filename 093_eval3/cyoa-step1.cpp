@@ -1,0 +1,146 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <algorithm>
+#include <climits>  // ULONG_MAX
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include "story.hpp"
+
+int main(int argc, char ** argv) {
+  // first check whether the user enter the directory correctly
+  if (argc != 2) {
+    std::cerr << "You enter the wrong number of directory.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // open the story.txt in this directory and check whether can open this file successfully
+  std::stringstream strstream;
+  std::string f_name;
+  std::string dir = argv[1];
+  strstream << dir << "/story.txt";
+  f_name = strstream.str();
+  std::ifstream f_story;
+  f_story.open(f_name.c_str());
+  // close f_story
+  if (!f_story.is_open()) {
+    std::cerr << "Could not open the file.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // declare a vector to store page number
+  //std::vector<std::pair<size_t, std::string> > num_type;
+  std::vector<size_t> v_num;
+  // create a vector to store all NewPage objects
+  std::vector<NewPage> v_page;
+  std::string curr_line;
+
+  while (!f_story.eof()) {
+    // get the current line of the story.txt and skip if current line is a blank line
+    std::getline(f_story, curr_line);
+
+    // new page case
+    if (curr_line.find('@') != std::string::npos) {
+      size_t at = curr_line.find('@');
+      std::string page_num_str = curr_line.substr(0, at);
+      std::string page_type = curr_line.substr(at + 1, 1);
+      std::string page_file = curr_line.substr(at + 3, curr_line.length() - (at + 3));
+
+      // check whether the page number is a valid integer fits into size_t
+      size_t page_num = check_return_pagenum(page_num_str);
+
+      // add the new page number to v_num and check whether the page delcaration is in order or not
+      if (v_num.size() == 0) {
+        v_num.push_back(page_num);
+      }
+      else {
+        std::vector<size_t>::iterator it = v_num.begin();
+        while (it != v_num.end()) {
+          if (*it >= page_num) {
+            std::cerr << "Page declaration not in order or has already been declared.\n";
+            exit(EXIT_FAILURE);
+          }
+          ++it;
+        }
+        v_num.push_back(page_num);
+      }
+
+      // check whether the page_type is a valid type
+      if ((page_type != "W") && (page_type != "L") && (page_type != "N")) {
+        std::cerr << "Page type is not valid.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // add the directory to the page_file name
+      std::stringstream curr_sstr;
+      curr_sstr << dir << "/" << page_file;
+      page_file = curr_sstr.str();
+
+      // create a NewPage object
+      NewPage new_page(page_num, page_type, page_file);
+      v_page.push_back(new_page);
+    }
+
+    // page choice case
+    else if ((curr_line.find('@') == std::string::npos) &&
+             (curr_line.find(':') != std::string::npos)) {
+      size_t slice_1 = curr_line.find(':');
+      size_t slice_2 = curr_line.find(':', slice_1 + 1);
+
+      std::string curr_page = curr_line.substr(0, slice_1);
+      std::string next_page = curr_line.substr(slice_1 + 1, slice_2 - (slice_1 + 1));
+      std::string choice_text =
+          curr_line.substr(slice_2 + 1, curr_line.length() - (slice_2 + 1));
+
+      // check whether the page number is valid
+      size_t curr_page_num = check_return_pagenum(curr_page);
+      size_t next_page_num = check_return_pagenum(next_page);
+
+      // check whether the page declaration has happened before
+      int dec_flag = 0;
+      for (size_t i = 0; i < v_num.size(); i++) {
+        if (v_num[i] == curr_page_num) {
+          dec_flag = 1;
+          break;
+        }
+      }
+      if (dec_flag == 0) {
+        std::cerr << "Page has not declared.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // create a PageChoice object and add to NewPage object
+      PageChoice page_choice(curr_page_num, next_page_num, choice_text, 0);
+
+      std::vector<NewPage>::iterator it = v_page.begin();
+      while (it != v_page.end()) {
+        if ((*it).get_num() == curr_page_num) {
+          // check whether it's a win or lose page
+          if (((*it).get_type() == "W") || ((*it).get_type() == "L")) {
+            std::cerr << "Win and Lose pages must not have any choices.\n";
+            exit(EXIT_FAILURE);
+          }
+
+          (*it).add_choice(page_choice);
+        }
+        ++it;
+      }
+    }
+  }
+  f_story.close();
+
+  // print all pages in v_page vector
+  for (size_t i = 0; i < v_page.size(); i++) {
+    std::cout << "Page " << v_page[i].get_num() << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << v_page[i];
+  }
+
+  return EXIT_SUCCESS;
+}

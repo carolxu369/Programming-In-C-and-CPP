@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+unsigned power(unsigned x, unsigned y) {
+  if (x == 0 && y == 0) {
+    return 1;
+  }
+  else if (x != 0 && y == 0) {
+    return 1;
+  }
+  else if (x == 0 && y != 0) {
+    return 0;
+  }
+
+  return x * power(x, y - 1);
+}
+
+void run_check(unsigned x, unsigned y, unsigned expected_answer) {
+  if (typeof(x) != unsigned) {
+    printf("The type of your x in wrong.");
+    exit(EXIT_FAILURE);
+  }
+  if (typeof(y) != unsigned) {
+    printf("The type of your y in wrong.");
+    exit(EXIT_FAILURE);
+  }
+  if (power(x, y) != expected_answer) {
+    printf("Your power calculation is wrong.");
+    exit(EXIT_FAILURE);
+  }
+}
+
+int main(void) {
+  run_check(x, y, expected_answer);
+  return EXIT_SUCCESS;
+}

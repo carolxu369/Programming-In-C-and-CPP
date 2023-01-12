@@ -1,0 +1,69 @@
+Welcome to the Emacs shell
+
+~/ece551/049_rot_matrix $ 
+~/ece551/049_rot_matrix $ 
+~/ece551/049_rot_matrix $ ls
+*eshell*  break1.txt  input2.txt  input5.txt  rotateMatrix     sample.out
+Makefile  grade.txt   input3.txt  input6.txt  rotateMatrix.c   sample.txt
+README    input1.txt  input4.txt  input7.txt  rotateMatrix.c~  
+~/ece551/049_rot_matrix $ 
+~/ece551/049_rot_matrix $ git add rotateMatrix.c
+~/ece551/049_rot_matrix $ git add Makefile 
+~/ece551/049_rot_matrix $ git commit -m "Did assignment 49"
+[master 5e18e1f] Did assignment 49
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+~/ece551/049_rot_matrix $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 475 bytes | 475.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   b6fec40..5e18e1f  master -> master
+~/ece551/049_rot_matrix $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   ../048_tests_rot_matrix/input1.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	*eshell*
+	break1.txt
+	input1.txt
+	input2.txt
+	input3.txt
+	input4.txt
+	input5.txt
+	input6.txt
+	input7.txt
+	rotateMatrix
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Please fix the above before requesting grading
+~/ece551/049_rot_matrix $ ls
+#*eshell*#  README      input1.txt  input4.txt  input7.txt      rotateMatrix.c~
+*eshell*    break1.txt  input2.txt  input5.txt  rotateMatrix    sample.out
+Makefile    grade.txt   input3.txt  input6.txt  rotateMatrix.c  sample.txt
+~/ece551/049_rot_matrix $ rm *eshell* input1.txt input2.txt input3.txt input4.txt input5.txt input6.txt input7.txt break1.txt rotateMatrix
+~/ece551/049_rot_matrix $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   ../048_tests_rot_matrix/input1.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Please fix the above before requesting grading
+~/ece551/049_rot_matrix $ git add .
+~/ece551/049_rot_matrix $ ls
+Makefile  README  grade.txt  rotateMatrix.c  rotateMatrix.c~  sample.out  sample.txt
+~/ece551/049_rot_matrix $ git add Makefile 

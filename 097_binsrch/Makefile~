@@ -1,0 +1,7 @@
+CPPFLAGS=-std=gnu++98 -pedantic -Wall -Werror -ggdb3
+test_bsearch: test_bsearch.cpp search.cpp function.h
+  g++ -o test_bsearch $(CPPFLAGS) -c test_bsearch.cpp search.cpp
+
+.PHONY: clean
+clean:
+  rm -f *.o *~ test_bsearch

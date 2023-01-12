@@ -1,0 +1,340 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <algorithm>
+#include <climits>  // ULONG_MAX
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <vector>
+
+#include "story.hpp"
+
+int main(int argc, char ** argv) {
+  // first check whether the user enter the directory correctly
+  if (argc != 2) {
+    std::cerr << "You enter the wrong number of directory.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // open the story.txt in this directory and check whether can open this file successfully
+  std::stringstream strstream;
+  std::string f_name;
+  std::string dir = argv[1];
+  strstream << dir << "/story.txt";
+  f_name = strstream.str();
+  std::ifstream f_story;
+  f_story.open(f_name.c_str());
+  // close f_story
+  if (!f_story.is_open()) {
+    std::cerr << "Could not open the file.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // declare a vector to store global variable value
+  std::vector<std::pair<std::string, long int> > name_value;
+  // declare a vector to store variable value on a specific page
+  std::vector<PageVar> page_var;
+  // declare a vector to store page number
+  std::vector<size_t> v_num;
+  // create a vector to store all NewPage objects
+  std::vector<NewPage> v_page;
+  std::string curr_line;
+
+  while (!f_story.eof()) {
+    // get the current line of the story.txt and skip if current line is a blank line
+    std::getline(f_story, curr_line);
+
+    // new page case
+    if (curr_line.find('@') != std::string::npos) {
+      size_t at = curr_line.find('@');
+      std::string page_num_str = curr_line.substr(0, at);
+      std::string page_type = curr_line.substr(at + 1, 1);
+      std::string page_file = curr_line.substr(at + 3, curr_line.length() - (at + 3));
+
+      // check whether the page number is a valid integer fits into size_t
+      size_t page_num = check_return_pagenum(page_num_str);
+
+      // add the new page number to v_num and check whether the page delcaration is in order or not
+      if (v_num.size() == 0) {
+        v_num.push_back(page_num);
+      }
+      else {
+        std::vector<size_t>::iterator it = v_num.begin();
+        while (it != v_num.end()) {
+          if (*it >= page_num) {
+            std::cerr << "Page declaration not in order or has already been declared.\n";
+            exit(EXIT_FAILURE);
+          }
+          ++it;
+        }
+        v_num.push_back(page_num);
+      }
+
+      // check whether the page_type is a valid type
+      if ((page_type != "W") && (page_type != "L") && (page_type != "N")) {
+        std::cerr << "Page type is not valid.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // add the directory to the page_file name
+      std::stringstream curr_sstr;
+      curr_sstr << dir << "/" << page_file;
+      page_file = curr_sstr.str();
+
+      // create a NewPage object
+      NewPage new_page(page_num, page_type, page_file);
+      v_page.push_back(new_page);
+    }
+
+    // newly added case pagenum$var=value
+    else if (curr_line.find('$') != std::string::npos) {
+      size_t dollar = curr_line.find('$');
+      size_t equal = curr_line.find('=');
+
+      // slice each part of the line
+      std::string page_str = curr_line.substr(0, dollar);
+      std::string name_str = curr_line.substr(dollar + 1, equal - (dollar + 1));
+      std::string value_str =
+          curr_line.substr(equal + 1, curr_line.length() - (equal + 1));
+
+      // convert string to number
+      size_t pagenum = check_return_pagenum(page_str);
+      long int var_value = check_var_value(value_str);
+
+      // check whether the page declaration has happened before
+      int dec_flag = 0;
+      for (size_t i = 0; i < v_num.size(); i++) {
+        if (v_num[i] == pagenum) {
+          dec_flag = 1;
+          break;
+        }
+      }
+      if (dec_flag == 0) {
+        std::cerr << "Page has not declared.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // create a new PageVar object and push to page_var vector
+      PageVar curr_pagevar(pagenum, name_str, var_value);
+      page_var.push_back(curr_pagevar);
+    }
+
+    // regular page choice case
+    else if ((curr_line.find('@') == std::string::npos) &&
+             (curr_line.find('[') == std::string::npos) &&
+             (curr_line.find(']') == std::string::npos) &&
+             (curr_line.find(':') != std::string::npos)) {
+      size_t slice_1 = curr_line.find(':');
+      size_t slice_2 = curr_line.find(':', slice_1 + 1);
+
+      std::string curr_page = curr_line.substr(0, slice_1);
+      std::string next_page = curr_line.substr(slice_1 + 1, slice_2 - (slice_1 + 1));
+      std::string choice_text =
+          curr_line.substr(slice_2 + 1, curr_line.length() - (slice_2 + 1));
+
+      // check whether the page number is valid
+      size_t curr_page_num = check_return_pagenum(curr_page);
+      size_t next_page_num = check_return_pagenum(next_page);
+
+      // check whether the page declaration has happened before
+      int dec_flag = 0;
+      for (size_t i = 0; i < v_num.size(); i++) {
+        if (v_num[i] == curr_page_num) {
+          dec_flag = 1;
+          break;
+        }
+      }
+      if (dec_flag == 0) {
+        std::cerr << "Page has not declared.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // create a PageChoice object and add to NewPage object
+      PageChoice page_choice(curr_page_num, next_page_num, choice_text, 0);
+
+      std::vector<NewPage>::iterator it = v_page.begin();
+      while (it != v_page.end()) {
+        if ((*it).get_num() == curr_page_num) {
+          // check whether it's a win or lose page
+          if (((*it).get_type() == "W") || ((*it).get_type() == "L")) {
+            std::cerr << "Win and Lose pages must not have any choices.\n";
+            exit(EXIT_FAILURE);
+          }
+
+          (*it).add_choice(page_choice);
+        }
+        ++it;
+      }
+    }
+
+    // page choice with variable check case
+    else if (curr_line.find('[') != std::string::npos) {
+      // check whether the condition is closed by a ]
+      if (curr_line.find(']') == std::string::npos) {
+        std::cerr << "Your variable value is not closed by a ].\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // slice to get parts
+      size_t l_bracket = curr_line.find('[');
+      size_t r_bracket = curr_line.find(']');
+      size_t equal_sign = curr_line.find('=');
+      size_t colon_1 = curr_line.find(':');
+      size_t colon_2 = curr_line.find(':', colon_1 + 1);
+
+      std::string curr_var =
+          curr_line.substr(l_bracket + 1, equal_sign - (l_bracket + 1));
+      std::string curr_value =
+          curr_line.substr(equal_sign + 1, r_bracket - (equal_sign + 1));
+
+      std::string curr_p = curr_line.substr(0, l_bracket);
+      std::string next_p = curr_line.substr(colon_1 + 1, colon_2 - (colon_1 + 1));
+      std::string curr_text =
+          curr_line.substr(colon_2 + 1, curr_line.length() - (colon_2 + 1));
+
+      // convert string to number
+      size_t curr_p_num = check_return_pagenum(curr_p);
+      size_t next_p_num = check_return_pagenum(next_p);
+      long int value_int = check_var_value(curr_value);
+
+      // check whether the page declaration has happened before
+      int dec_flag = 0;
+      for (size_t i = 0; i < v_num.size(); i++) {
+        if (v_num[i] == curr_p_num) {
+          dec_flag = 1;
+          break;
+        }
+      }
+      if (dec_flag == 0) {
+        std::cerr << "Page has not declared.\n";
+        exit(EXIT_FAILURE);
+      }
+
+      // create a PageChoice object and add to NewPage object
+      PageChoice page_choice(curr_p_num, next_p_num, curr_text, 1);
+      page_choice.create_pair(curr_var, value_int);
+
+      std::vector<NewPage>::iterator it = v_page.begin();
+      while (it != v_page.end()) {
+        if ((*it).get_num() == curr_p_num) {
+          // check whether it's a win or lose page
+          if (((*it).get_type() == "W") || ((*it).get_type() == "L")) {
+            std::cerr << "Win and Lose pages must not have any choices.\n";
+            exit(EXIT_FAILURE);
+          }
+
+          (*it).add_choice(page_choice);
+        }
+        ++it;
+      }
+    }
+  }
+  f_story.close();
+
+  // now we get the new v_page vector
+  // check all the valid cases in step 2
+  cyoa_step2(v_page);
+
+  // print the result with user input
+  // check whether the story has page 0 to start
+  if (v_page[0].get_num() != 0) {
+    std::cerr << "The story doesn't have page 0.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  std::string w_l = v_page[0].get_type();
+  // std::cout << v_page[0];
+  size_t page_idx = 0;
+  // declare a vector to store invalid choice
+  std::vector<size_t> not_choice;
+
+  for (size_t i = 0; i < page_var.size(); i++) {
+    if (page_var[i].page_num == v_page[page_idx].get_num()) {
+      // update the variable value in the global vector
+      if (not_in_var(page_var[i].var_name, name_value) == 1) {
+        name_value.push_back(make_pair(page_var[i].var_name, page_var[i].var_value));
+      }
+      else {
+        for (size_t j = 0; j < name_value.size(); j++) {
+          if (name_value[j].first == page_var[i].var_name) {
+            name_value[j].second = page_var[i].var_value;
+          }
+        }
+      }
+    }
+  }
+
+  // update the not_choice
+  not_choice = get_invalid_choice(v_page[page_idx], name_value);
+  // update that value in NewPage object
+  v_page[page_idx].set_not_choice(not_choice);
+  // print the curr_page
+  std::cout << v_page[page_idx];
+
+  while ((w_l != "W") && (w_l != "L")) {
+    std::string user_input;
+    std::getline(std::cin, user_input);
+
+    // check whether the number from the user is a number
+    while ((str_digit(user_input) == 1) || (strtoul(user_input.c_str(), NULL, 10) == 0) ||
+           (strtoul(user_input.c_str(), NULL, 10) >
+            v_page[page_idx].get_v_choice().size()) ||
+           (not_in_vector(strtoul(user_input.c_str(), NULL, 10), not_choice) == 0)) {
+      if (not_in_vector(strtoul(user_input.c_str(), NULL, 10), not_choice) == 0) {
+        std::cout << "That choice is not available at this time, please try again\n";
+      }
+      else {
+        std::cout << "That is not a valid choice, please try again\n";
+      }
+      std::cin.clear();
+      std::getline(std::cin, user_input);
+    }
+
+    // conver the valid number to size_t
+    size_t user_num = strtoul(user_input.c_str(), NULL, 10);
+
+    // get the next page from user_num
+    size_t n_page = v_page[page_idx].get_v_choice()[user_num - 1].get_next_page();
+
+    for (size_t i = 0; i < v_page.size(); i++) {
+      // print this page and update loop parameters
+      if (v_page[i].get_num() == n_page) {
+        page_idx = i;
+        w_l = v_page[i].get_type();
+
+        for (size_t i = 0; i < page_var.size(); i++) {
+          if (page_var[i].page_num == v_page[page_idx].get_num()) {
+            // update the variable value in the global vector
+            if (not_in_var(page_var[i].var_name, name_value) == 1) {
+              name_value.push_back(
+                  make_pair(page_var[i].var_name, page_var[i].var_value));
+            }
+            else {
+              for (size_t j = 0; j < name_value.size(); j++) {
+                if (name_value[j].first == page_var[i].var_name) {
+                  name_value[j].second = page_var[i].var_value;
+                }
+              }
+            }
+          }
+        }
+
+        // update the not_choice
+        not_choice = get_invalid_choice(v_page[page_idx], name_value);
+        // update that value in NewPage object
+        v_page[page_idx].set_not_choice(not_choice);
+        // print the curr_page
+        std::cout << v_page[page_idx];
+        break;
+      }
+    }
+  }
+
+  return EXIT_SUCCESS;
+}

@@ -1,0 +1,122 @@
+#include <ctype.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "rand_story.h"
+// use the header files from eval 1
+
+// story-step 2
+int main(int argc, char ** argv) {
+  // check whether we only have one command line argument
+  if (argc != 2) {
+    perror("The number of command line arguments entered is wrong.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // open the file for reading and check the corresponding error
+  FILE * f = fopen(argv[1], "r");
+  if (f == NULL) {
+    perror("The file cannot be opened.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // declare the array of all categories
+  catarray_t * cat_array = malloc(sizeof(*cat_array));
+  cat_array->arr = malloc(sizeof(*cat_array->arr));
+  cat_array->n = 0;
+
+  // use getline to operate on each line of the file
+  size_t sz = 0;
+  char * line = NULL;
+  char * cat_name = NULL;
+  char * curr_word = NULL;
+
+  while (getline(&line, &sz, f) >= 0) {
+    printf("while 1 loop wrong\n");
+    size_t len = strlen(line);
+
+    // first check whether each line of the file has least one :
+    int flag = 0;
+    for (size_t i = 0; i < len; i++) {
+      if (line[i] == ':') {
+        flag = 1;
+      }
+    }
+    if (flag == 0) {
+      perror("One line doesn't have ':' to separate category name and word.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    char * ptr = line;
+    while (*ptr != ':') {
+      printf("while 2 loop wrong\n");
+      cat_name = cpy_cat_string(ptr, ':');
+      // free cat_name;
+    }
+
+    ptr++;
+
+    while (*ptr != '\n') {
+      printf("while 3 loop wrong\n");
+      // the case when the last line doesn't have \n char
+      curr_word = cpy_cat_string(ptr, '\n');
+      // free curr_word;
+    }
+
+    // check whether the cat_name has already been included in the cat_array
+    // if the cat_name is in the cat_array, then append the curr_word to this cat_name word list and increment n_words by 1
+    for (size_t i = 0; i < cat_array->n; i++) {
+      if (strcmp(cat_name, cat_array->arr[i].name) == 0) {
+        cat_array->arr[i].n_words++;
+        cat_array->arr[i].words =
+            realloc(cat_array->arr[i].words,
+                    cat_array->arr[i].n_words * sizeof(*cat_array->arr[i].words));
+        // free cat_array->arr[i]->words
+        cat_array->arr[i].words[cat_array->arr[i].n_words - 1] = strdup(curr_word);
+        // free cat_array->arr[i]->words[n_words-1]
+      }
+    }
+
+    // if cat_array is empty or no cat_names in cat_array match the new cat_name
+    // create a new category_t for this new cat_name and add that to the cat_array
+    category_t * new_cat = NULL;
+    new_cat->name = strdup(cat_name);
+    // free new_cat->name
+    new_cat->n_words = 1;
+    new_cat->words = malloc(1 * sizeof(*new_cat->words));
+    // free new_cat->words
+    // new_cat->words[n_words-1] = malloc(len_word*sizeof(*new_cat->words[n_words-1]));
+    new_cat->words[0] = strdup(curr_word);
+    // free new_cat->words[n_words-1]
+
+    // add this new category_t to cat_array
+    cat_array->n++;
+    cat_array->arr = realloc(cat_array->arr, cat_array->n * sizeof(*cat_array->arr));
+    // free cat_array->arr
+    cat_array->arr[cat_array->n - 1] = *new_cat;
+  }
+
+  printWords(cat_array);
+
+  // free part
+  free(line);
+  free(cat_name);
+  free(curr_word);
+  for (size_t i = 0; i < cat_array->n; i++) {
+    for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+      free(cat_array->arr[i].words[j]);
+    }
+    free(cat_array->arr[i].words);
+    free(cat_array->arr[i].name);
+  }
+  free(cat_array->arr);
+
+  // check whether the file is closed or not
+  if (fclose(f) != 0) {
+    perror("The file cannot be closed.\n");
+    exit(EXIT_FAILURE);
+  }
+  return EXIT_SUCCESS;
+}

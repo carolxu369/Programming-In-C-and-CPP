@@ -1,0 +1,25 @@
+CPPFLAGS=-std=gnu++98 -pedantic -Wall -Werror -ggdb3
+PROGS=cyoa-step1 cyoa-step2 cyoa-step3 cyoa-step4
+all: $(PROGS)
+cyoa-step4: cyoa-step4.o story.o
+	g++ -o cyoa-step4 cyoa-step4.o story.o
+cyoa-step4.o: cyoa-step4.cpp
+	g++ $(CPPFLAGS) -c cyoa-step4.cpp
+cyoa-step3: cyoa-step3.o story.o
+	g++ -o cyoa-step3 cyoa-step3.o story.o
+cyoa-step3.o: cyoa-step3.cpp
+	g++ $(CPPFLAGS) -c cyoa-step3.cpp
+cyoa-step2: cyoa-step2.o story.o
+	g++ -o cyoa-step2 cyoa-step2.o story.o
+cyoa-step2.o: cyoa-step2.cpp
+	g++ $(CPPFLAGS) -c cyoa-step2.cpp
+cyoa-step1: cyoa-step1.o story.o
+	g++ -o cyoa-step1 cyoa-step1.o story.o
+cyoa-step1.o: cyoa-step1.cpp
+	g++ $(CPPFLAGS) -c cyoa-step1.cpp
+story.o: story.cpp story.hpp
+	g++ $(CPPFLAGS) -c story.cpp
+
+.PHONY: clean
+clean:
+	rm -f *.o *~ cyoa-step1 *~ cyoa-step2 *~ cyoa-step3 *~ cyoa-step4

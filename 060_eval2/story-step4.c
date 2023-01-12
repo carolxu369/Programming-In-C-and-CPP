@@ -1,0 +1,241 @@
+#include <ctype.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "rand_story.h"
+// use the header files from eval 1
+
+// story-step 4
+int main(int argc, char ** argv) {
+  // check whether we have one optional and two required command line arguments
+  if ((argc < 3) | (argc > 4)) {
+    perror("The number of command line arguments entered is wrong.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // first deal with the case when no reuse of words
+  if (strcmp(argv[1], "-n") == 0) {
+    // open the file for reading and check the corresponding error
+    FILE * f_word = fopen(argv[2], "r");
+    if (f_word == NULL) {
+      perror("The file for category/word cannot be opened.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    FILE * f_story = fopen(argv[3], "r");
+    if (f_story == NULL) {
+      perror("The file for story cannot be opened.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    // first get the cat_array from story-step 2
+    catarray_t * cat_array = get_catarray_t(f_word);
+    // free cat_array
+
+    // declare a category_t to store backreference words
+    category_t * back_words = malloc(sizeof(*back_words));
+    // free back_words
+    back_words->n_words = 0;
+    back_words->words = malloc(back_words->n_words * sizeof(*back_words->words));
+    // free back_words->words
+
+    // now replace the blanks in story with words
+    // use getline to operate on each line of the file
+    size_t sz = 0;
+    char * line = NULL;
+    while (getline(&line, &sz, f_story) >= 0) {
+      size_t len = strlen(line);
+
+      // first check whether the number of underscores is enough to make valid blanks
+      int _count = 0;
+      for (size_t i = 0; i < len; i++) {
+        if (line[i] == '_') {
+          _count++;
+        }
+      }
+      if ((_count % 2) != 0) {
+        perror("Some blanks begin but not end with matching underscores.\n");
+        exit(EXIT_FAILURE);
+      }
+
+      // print each character in the line with blanks replaced
+      char * ptr = line;
+      while (*ptr != '\0') {
+        // if find a starting underscore, declare an empty string using realloc to store the category name until meeting the closing underscore
+        if (*ptr == '_') {
+          char * cat_name = NULL;
+          // declare a count to record the size change of the cat_name
+          size_t count = 1;
+          cat_name = realloc(cat_name, count * sizeof(*cat_name));
+          // first concatenate the cat_name with an empty string in the case if the starting underscore and closing underscore are adjacent
+          // get this idea of strcpy and strcat from MLP 057
+          char * empty_cat = "";
+          strcpy(cat_name, empty_cat);
+          ptr++;
+          // use another loop to find the closing underscore
+          while (*ptr != '_') {
+            // increase the cat_name size to store the new character
+            count++;
+            cat_name = realloc(cat_name, count * sizeof(*cat_name));
+            // convert the single character to string to do the following strcat
+            // to add the character to the cat_name
+            char curr_str[2] = {*ptr, '\0'};
+            strcat(cat_name, curr_str);
+            ptr++;
+          }
+
+          // first check whether cat_name is a valid integer of at least one
+          int flag = 0;
+          char * cat_int = NULL;
+          size_t int_count = 1;
+          cat_int = realloc(cat_int, int_count * sizeof(*cat_int));
+          // free cat_int
+          strcpy(cat_int, empty_cat);
+          char * cat_ptr = cat_name;
+
+          // jump all the spaces before any possible digit
+          // once find the digit break the loop
+          while (*cat_ptr != '\0') {
+            if ((*cat_ptr == ' ') | (*cat_ptr == '\t')) {
+              cat_ptr++;
+              continue;
+            }
+            else {
+              break;
+            }
+          }
+
+          // the pointer is pointing at the possible first digit
+          // loop to find continuous digit and add new digit to cat_int
+          // once encounter a character that is not a digit, change cat_int back to an empty string
+          // and break the loop
+          while (*cat_ptr != '\0') {
+            if (isdigit(*cat_ptr) != 0) {
+              int_count++;
+              cat_int = realloc(cat_int, int_count * sizeof(*cat_int));
+              char curr_int[2] = {*cat_ptr, '\0'};
+              strcat(cat_int, curr_int);
+              cat_ptr++;
+            }
+            else {
+              cat_int = realloc(cat_int, 1 * sizeof(*cat_int));
+              strcpy(cat_int, empty_cat);
+              break;
+            }
+          }
+
+          // check whether there are digits in cat_int
+          // if cat_int contains digit, do backreference to find the replacement word
+          if (strlen(cat_int) > 0) {
+            size_t back_int = atoi(cat_int);
+            // make sure the integer is at least of one
+            if (back_int >= 1) {
+              if (back_int > back_words->n_words) {
+                perror("The backreference word list is not enough for backrefering.\n");
+                exit(EXIT_FAILURE);
+              }
+              else {
+                flag = 1;
+                char * curr_back = NULL;
+                curr_back = strdup(back_words->words[back_words->n_words - back_int]);
+                // free curr_back
+                printf("%s", curr_back);
+                // add the curr_back the the back_words
+                back_words->n_words++;
+                back_words->words = realloc(
+                    back_words->words, back_words->n_words * sizeof(*back_words->words));
+                back_words->words[back_words->n_words - 1] = strdup(curr_back);
+                free(curr_back);
+              }
+            }
+          }
+          free(cat_int);
+
+          // in the case we don't need to do backreference but do chooseword
+          if (flag == 0) {
+            const char * curr_word = chooseWord(cat_name, cat_array);
+            // delete the curr_word from cat_name words list to avoid reuse
+            for (size_t i = 0; i < cat_array->n; i++) {
+              if (strcmp(cat_array->arr[i].name, cat_name) == 0) {
+                for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+                  if (strcmp(cat_array->arr[i].words[j], curr_word) == 0) {
+                    //free(cat_array->arr[i].words[j]);
+                    for (size_t h = j; h < cat_array->arr[i].n_words - 1; h++) {
+                      cat_array->arr[i].words[h] = strdup(cat_array->arr[i].words[h + 1]);
+                      // cat_array->arr[i].words[h] = cat_array->arr[i].words[h + 1];
+                    }
+                  }
+                }
+                cat_array->arr[i].n_words--;
+                cat_array->arr[i].words =
+                    realloc(cat_array->arr[i].words,
+                            cat_array->arr[i].n_words * sizeof(*cat_array->arr[i].words));
+              }
+            }
+
+            printf("%s", curr_word);
+            // add the curr_word to back_words
+            back_words->n_words++;
+            back_words->words = realloc(back_words->words,
+                                        back_words->n_words * sizeof(*back_words->words));
+            back_words->words[back_words->n_words - 1] = strdup(curr_word);
+          }
+
+          // free the realloc memory taken by cat_name
+          free(cat_name);
+          ptr++;
+        }
+        else {
+          // if the character is not in the category name, then just print the character
+          printf("%c", *ptr);
+          ptr++;
+        }
+      }
+    }
+    free(line);
+
+    // free part
+    free_catarray_t(cat_array);
+    free_category_t(back_words);
+
+    // check whether the file is closed or not
+    if (fclose(f_word) != 0) {
+      perror("The file cannot be closed.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    if (fclose(f_story) != 0) {
+      perror("The file cannot be closed.\n");
+      exit(EXIT_FAILURE);
+    }
+  }
+  else {
+    FILE * f_word = fopen(argv[1], "r");
+    if (f_word == NULL) {
+      perror("The file for category/word cannot be opened.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    FILE * f_story = fopen(argv[2], "r");
+    if (f_story == NULL) {
+      perror("The file for story cannot be opened.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    print_story(f_word, f_story);
+
+    // check whether the file is closed or not
+    if (fclose(f_word) != 0) {
+      perror("The file cannot be closed.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    if (fclose(f_story) != 0) {
+      perror("The file cannot be closed.\n");
+      exit(EXIT_FAILURE);
+    }
+  }
+  return EXIT_SUCCESS;
+}

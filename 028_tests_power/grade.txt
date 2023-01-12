@@ -1,0 +1,55 @@
+Grading at 09/16/2022:16:38:06.276228
+For commit ID 9b9aa3a3d2b06e9b0c54ab398afd9476dd1922b0
+Grading at Fri Sep 16 12:38:05 PM EDT 2022
+**Testing broken implementation 10 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 11 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 1 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 2 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 3 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 4 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 5 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 6 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 7 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 8 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 9 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing correct implementation **
+-------------------------------------
+
+
+All tests were ok.
+
+
+Overall Grade: PASSED

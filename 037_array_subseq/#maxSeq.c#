@@ -1,0 +1,23 @@
+size_t n){
+	if ((size_t = 0) || (size_t = 1)){
+		return size_t;
+	}
+	int ans = 0, count = 1;
+	int curr_elem = array[0];
+
+	for (int i=1; i<n; i++){
+		if (array[i] > curr_elem){
+			count += 1;
+		}
+		else{
+			if (count >= ans){
+				ans = count;
+			}
+			count = 1;
+		}
+
+		curr_elem = array[i];
+	}
+
+	return ans;
+}

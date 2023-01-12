@@ -1,0 +1,76 @@
+Welcome to the Emacs shell
+
+~/ece551/060_eval2 $ git add .
+~/ece551/060_eval2 $ git commit -m "Did assignment 60"
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+~/ece551/060_eval2 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/060_eval2 $ valgrind ./story-step4 -n words.txt story2.txt 
+==3499629== Memcheck, a memory error detector
+==3499629== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3499629== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3499629== Command: ./story-step4 -n words.txt story2.txt
+==3499629== 
+Once upon a time, there was a walrus. This walrus lived in a very
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3499629== 
+==3499629== HEAP SUMMARY:
+==3499629==     in use at exit: 43 bytes in 6 blocks
+==3499629==   total heap usage: 200 allocs, 194 frees, 11,797 bytes allocated
+==3499629== 
+==3499629== LEAK SUMMARY:
+==3499629==    definitely lost: 43 bytes in 6 blocks
+==3499629==    indirectly lost: 0 bytes in 0 blocks
+==3499629==      possibly lost: 0 bytes in 0 blocks
+==3499629==    still reachable: 0 bytes in 0 blocks
+==3499629==         suppressed: 0 bytes in 0 blocks
+==3499629== Rerun with --leak-check=full to see details of leaked memory
+==3499629== 
+==3499629== For lists of detected and suppressed errors, rerun with: -s
+==3499629== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ valgrind --leak-check=full ./story-step4 -n words.txt story2.txt
+==3502688== Memcheck, a memory error detector
+==3502688== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3502688== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3502688== Command: ./story-step4 -n words.txt story2.txt
+==3502688== 
+Once upon a time, there was a walrus. This walrus lived in a very
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3502688== 
+==3502688== HEAP SUMMARY:
+==3502688==     in use at exit: 43 bytes in 6 blocks
+==3502688==   total heap usage: 200 allocs, 194 frees, 11,797 bytes allocated
+==3502688== 
+==3502688== 21 bytes in 3 blocks are definitely lost in loss record 1 of 2
+==3502688==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3502688==    by 0x490B60E: strdup (strdup.c:42)
+==3502688==    by 0x10A2B1: get_catarray_t (rand_story.c:116)
+==3502688==    by 0x109523: main (story-step4.c:34)
+==3502688== 
+==3502688== 22 bytes in 3 blocks are definitely lost in loss record 2 of 2
+==3502688==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3502688==    by 0x490B60E: strdup (strdup.c:42)
+==3502688==    by 0x10A234: get_catarray_t (rand_story.c:99)
+==3502688==    by 0x109523: main (story-step4.c:34)
+==3502688== 
+==3502688== LEAK SUMMARY:
+==3502688==    definitely lost: 43 bytes in 6 blocks
+==3502688==    indirectly lost: 0 bytes in 0 blocks
+==3502688==      possibly lost: 0 bytes in 0 blocks
+==3502688==    still reachable: 0 bytes in 0 blocks
+==3502688==         suppressed: 0 bytes in 0 blocks
+==3502688== 
+==3502688== For lists of detected and suppressed errors, rerun with: -s
+==3502688== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ 

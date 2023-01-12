@@ -1,0 +1,1324 @@
+Welcome to the Emacs shell
+
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 1f1e269] Did assignment 43
+ 1 file changed, 1 deletion(-)
+~/ece551/043_eval1 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+Please fix the above before requesting grading
+~/ece551/043_eval1 $ git push --help
+WARNING: terminal is not fully functional
+Press RETURN to continue 
+
+GIT-PUSH(1)                                Git Manual                               GIT-PUSH(1)
+
+NAME
+       git-push - Update remote refs along with associated objects
+
+SYNOPSIS
+       git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
+                  [--repo=<repository>] [-f | --force] [-d | --delete] [--prune] [-v | --verbose]
+                  [-u | --set-upstream] [-o <string> | --push-option=<string>]
+                  [--[no-]signed|--signed=(true|false|if-asked)]
+                  [--force-with-lease[=<refname>[:<expect>]] [--force-if-includes]]
+                  [--no-verify] [<repository> [<refspec>...]]
+
+DESCRIPTION
+       Updates remote refs using local refs, while sending objects necessary to complete the
+       given refs.
+
+       You can make interesting things happen to a repository every time you push into it, by
+       setting up hooks there. See documentation for git-receive-pack(1).
+
+       When the command line does not specify where to push with the <repository> argument,
+       branch.*.remote configuration for the current branch is consulted to determine where to
+       push. If the configuration is missing, it defaults to origin.
+
+       When the command line does not specify what to push with <refspec>... arguments or
+       --all, --mirror, --tags options, the command finds the default <refspec> by consulting
+       remote.*.push configuration, and if it is not found, honors push.default configuration
+       to decide what to push (See git-config(1) for the meaning of push.default).
+
+       When neither the command-line nor the configuration specify what to push, the default
+       behavior is used, which corresponds to the simple value for push.default: the current
+       branch is pushed to the corresponding upstream branch, but as a safety measure, the push
+       is aborted if the upstream branch does not have the same name as the local one.
+
+OPTIONS
+       <repository>
+           The "remote" repository that is destination of a push operation. This parameter can
+           be either a URL (see the section GIT URLS below) or the name of a remote (see the
+           section REMOTES below).
+ Manual page git-push(1) line 1 (press h for help or q to quit)q
+~/ece551/043_eval1 $ ls
+#error.csv#      error.csv    pandemic.h        printCumulative.o  test_population.csv
+Makefile         error.csv~   population.csv    printDailyMax      test_population.csv~
+README           grade.txt    printCountries    printDailyMax.o    testcases.txt
+daily_cases.csv  pandemic.c   printCountries.o  printRunningAvg    testcases.txt~
+daily_small.csv  pandemic.c~  printCumulative   printRunningAvg.o  
+~/ece551/043_eval1 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 339 bytes | 339.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   cf5fabe..c13f4ac  master     -> origin/master
+error: Terminal is dumb, but EDITOR unset
+Not committing merge; use 'git commit' to complete the merge.
+~/ece551/043_eval1 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/043_eval1 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/043_eval1 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/043_eval1 $ git pull ...
+error: You have not concluded your merge (MERGE_HEAD exists).
+hint: Please, commit your changes before merging.
+fatal: Exiting because of unfinished merge.
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master a060604] Did assignment 43
+~/ece551/043_eval1 $ git push
+Enumerating objects: 17, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (11/11), 930 bytes | 930.00 KiB/s, done.
+Total 11 (delta 8), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   c13f4ac..a060604  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: a0606049aac33f73f277bf5de5290b867ae8dded
+
+Grading this assignment requires 1 eval tokens
+You have 2998 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ la
+la: command not found
+~/ece551/043_eval1 $ ls
+#error.csv#      error.csv    pandemic.h        printCumulative.o  test_population.csv
+Makefile         error.csv~   population.csv    printDailyMax      test_population.csv~
+README           grade.txt    printCountries    printDailyMax.o    testcases.txt
+daily_cases.csv  pandemic.c   printCountries.o  printRunningAvg    testcases.txt~
+daily_small.csv  pandemic.c~  printCumulative   printRunningAvg.o  
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 398 bytes | 398.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   a060604..2fd8045  master     -> origin/master
+Updating a060604..2fd8045
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ ls
+#error.csv#      error.csv    pandemic.h        printCumulative.o  test_population.csv
+Makefile         error.csv~   population.csv    printDailyMax      test_population.csv~
+README           grade.txt    printCountries    printDailyMax.o    testcases.txt
+daily_cases.csv  pandemic.c   printCountries.o  printRunningAvg    testcases.txt~
+daily_small.csv  pandemic.c~  printCumulative   printRunningAvg.o  
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:22:45.237770
+For commit ID a0606049aac33f73f277bf5de5290b867ae8dded
+Grading at Wed Oct  5 01:22:42 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_small.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master ea9a960] Did assignment 43
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 353 bytes | 353.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   2fd8045..ea9a960  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: ea9a96001710ec3c76e2ae27ead451d10156ed55
+
+Grading this assignment requires 1 eval tokens
+You have 2997 eval remaining
+Do you wish to continue? y
+Grading enqueued. You are position 1 in the queue
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 395 bytes | 395.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   ea9a960..62cbba6  master     -> origin/master
+Updating ea9a960..62cbba6
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:24:19.357603
+For commit ID ea9a96001710ec3c76e2ae27ead451d10156ed55
+Grading at Wed Oct  5 01:24:16 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_small.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master cdda6fa] Did assignment 43
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 344 bytes | 344.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   62cbba6..cdda6fa  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: cdda6fa92c506b21d6a00fecfe9816b84421ee83
+
+Grading this assignment requires 1 eval tokens
+You have 2996 eval remaining
+Do you wish to continue? y
+Grading enqueued. You are position 1 in the queue
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 426 bytes | 426.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   cdda6fa..29fd5fd  master     -> origin/master
+Updating cdda6fa..29fd5fd
+Fast-forward
+ 043_eval1/grade.txt | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:25:25.936020
+For commit ID cdda6fa92c506b21d6a00fecfe9816b84421ee83
+Grading at Wed Oct  5 01:25:23 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries population.csv
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_small.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 2e9a07b] Did assignment 43
+ 2 files changed, 354 insertions(+), 2 deletions(-)
+ create mode 100644 043_eval1/*eshell*
+~/ece551/043_eval1 $ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 3.39 KiB | 3.39 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   29fd5fd..2e9a07b  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 2e9a07b9f72c9a84391b7637a6c9e4ea0cb71e3d
+
+Grading this assignment requires 1 eval tokens
+You have 2995 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 397 bytes | 99.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   2e9a07b..9b69725  master     -> origin/master
+Updating 2e9a07b..9b69725
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:27:06.709564
+For commit ID 2e9a07b9f72c9a84391b7637a6c9e4ea0cb71e3d
+Grading at Wed Oct  5 01:27:04 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries population.csv
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_small.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ cat test_population.csv 
+asd fgh qwe,
+asd,184467440737095516156
+asd,18446744073709551616
+asd,18446744073709551615
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdn,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdna,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdnasasdasdagscvshgcascghavsghcvgasvcgasvcahsvdhagdasd,123
+7asd,123\n123
+8asd,123\0123
+1asiduak123~/ece551/043_eval1 $ cat test_population.csv 
+asd fgh qwe,
+asd,184467440737095516156
+asd,18446744073709551616
+asd,18446744073709551615
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdn,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdna,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdnasasdasdagscvshgcascghavsghcvgasvcgasvcahsvdhagdasd,123
+7asd,123\n123
+8asd,123\0123
+1asiduak123~/ece551/043_eval1 $ cat testcases.txt 
+#error
+printCountries error.csv
+printDailyMax population.csv
+#success
+printCountries test_population.csv
+printDailyMax population.csv daily_cases.csv
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 61920c7] Did assignment 43
+ 2 files changed, 96 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 937 bytes | 937.00 KiB/s, done.
+Total 5 (delta 4), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   9b69725..61920c7  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 61920c7452d2c259d0b1ba8bb2ddb10b276c2248
+
+Grading this assignment requires 1 eval tokens
+You have 3000 eval remaining
+Do you wish to continue? y
+Grading enqueued. You are position 1 in the queue
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 489 bytes | 489.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   61920c7..04c8a31  master     -> origin/master
+Updating 61920c7..04c8a31
+Fast-forward
+ 043_eval1/grade.txt | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:29:50.679857
+For commit ID 61920c7452d2c259d0b1ba8bb2ddb10b276c2248
+Grading at Wed Oct  5 01:29:48 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git push
+Everything up-to-date
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master f8fd93f] Did assignment 43
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 376 bytes | 376.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   04c8a31..f8fd93f  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: f8fd93f685aa2bcb6e5985c43d34eae8171ba22b
+
+Grading this assignment requires 1 eval tokens
+You have 2999 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 401 bytes | 401.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   f8fd93f..bcdd7fb  master     -> origin/master
+Updating f8fd93f..bcdd7fb
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:31:53.544700
+For commit ID f8fd93f685aa2bcb6e5985c43d34eae8171ba22b
+Grading at Wed Oct  5 01:31:50 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 09243c8] Did assignment 43
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 397 bytes | 397.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   bcdd7fb..09243c8  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 09243c8f1b46efae19fa296a86c9d8fe2842ca23
+
+Grading this assignment requires 1 eval tokens
+You have 2998 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 398 bytes | 398.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   09243c8..a63ac77  master     -> origin/master
+Updating 09243c8..a63ac77
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:34:59.422448
+For commit ID 09243c8f1b46efae19fa296a86c9d8fe2842ca23
+Grading at Wed Oct  5 01:34:56 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ ls
+#*eshell*#   daily_cases.csv  pandemic.c~       printCumulative.o    test_population.csv~
+#error.csv#  daily_small.csv  pandemic.h        printDailyMax        testcases.txt
+*eshell*     error.csv        population.csv    printDailyMax.o      testcases.txt~
+*eshell*~    error.csv~       printCountries    printRunningAvg      
+Makefile     grade.txt        printCountries.o  printRunningAvg.o    
+README       pandemic.c       printCumulative   test_population.csv  
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 4c53815] Did assignment 43
+ 1 file changed, 2 deletions(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 368 bytes | 368.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   a63ac77..4c53815  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 4c53815b3fff7d824af085918cac98fc083bb146
+
+Grading this assignment requires 1 eval tokens
+You have 2997 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 399 bytes | 399.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   4c53815..11f41ff  master     -> origin/master
+Updating 4c53815..11f41ff
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:36:45.314001
+For commit ID 4c53815b3fff7d824af085918cac98fc083bb146
+Grading at Wed Oct  5 01:36:42 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+The number of the population is out of required bound.
+: Success
+~/ece551/043_eval1 $ cat test_population.csv 
+Country,Population
+asd,184467
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdn,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdna,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdnasasdasdagscvshgcascghavsghcvgasvcgasvcahsvdhagdasd,123
+7asd,123\n123
+8asd,123\0123
+1asiduak123~/ece551/043_eval1 $ cat pandemic.c
+#include "pandemic.h"
+
+#include <ctype.h>
+#include <math.h>
+//#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+// use the header files from MLP 049 rotateMatrix.c
+
+// \0 between country and population
+// space, tab, before, between, after the population
+// \n in before, between, after population
+country_t parseLine(char * line) {
+  // declare the country_t struct
+  country_t ans;
+  ans.name[0] = '\0';
+  ans.population = 0;
+
+  char * ptr = line;
+  int idx = 0;
+
+  // parse the the country name first
+  while (*ptr != ',') {
+    // check if there is any '\n' or '\0' in the country's name or there is no comma in the input line
+    if ((*ptr == '\n') | (*ptr == '\0')) {
+      perror("You have an invalid input line.\n");
+      exit(EXIT_FAILURE);
+    }
+    // check whether the country name length is out of bound.
+    if (idx > 62) {
+      perror("The country name is out of the required length.\n");
+      exit(EXIT_FAILURE);
+    }
+    ans.name[idx] = *ptr;
+    ans.name[idx + 1] = '\0';
+    idx++;
+    ptr++;
+  }
+
+  // the starting position of the population
+  ptr++;
+  // declare an array to store the population
+  // the size of the array is 21 as the largest length of uint64_t is 20 plus the null terminator
+  char number[21];
+  number[0] = '\0';
+  // declare a new index to record population
+  int pop_idx = 0;
+
+  while (*ptr != '\0') {
+    // if there are white spaces before the digits start, we ignore those spaces
+    if ((*ptr == ' ') | (*ptr == '\t')) {
+      ptr++;
+      continue;
+    }
+
+    if (*ptr == '\n') {
+      ptr++;
+      continue;
+    }
+
+    // check whether the characters in the poplutaion are digits
+    if (isdigit(*ptr) == 0) {
+      perror("The input character in the population is not a digit.\n");
+      exit(EXIT_FAILURE);
+    }
+    if (idx > 20) {
+      perror("The number of the population is out of required bound.\n");
+      exit(EXIT_FAILURE);
+    }
+    number[pop_idx] = *ptr;
+    number[pop_idx + 1] = '\0';
+    pop_idx++;
+    ptr++;
+  }
+
+  // declare an uint64_t to store population
+  uint64_t pop_number = 0;
+  pop_number = atoi(number);
+  //uint64_t largest = 18446744073709551615;
+  // uint64_t largest = 1ULL;
+
+  // check whether the pop_number is out of uint64_t
+  if ((pop_number < 0) | (pop_number > 1000000000000000000)) {
+    perror("The number of the population is out of required bound.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  ans.population = pop_number;
+
+  return ans;
+}
+
+void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
+  // if the n_days is less than 7, then we don't have enough data to calculate the seven-day running average
+  // we just do nothing and exit with success
+  if (n_days < 7) {
+    exit(EXIT_SUCCESS);
+  }
+
+  // declare a double to store the sum of the data
+  double sum_case = 0;
+
+  // loop through every seven pieces of data per time, add them up and divided by 7
+  // update that value to avg until the end of the data
+  for (size_t i = 0; i < (n_days - 6); i++) {
+    for (size_t j = i; j < i + 7; j++) {
+      sum_case += data[j];
+    }
+    avg[i] = sum_case / 7;
+    sum_case = 0;
+  }
+}
+
+void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
+  // declare a cumulative sum to record the cumulative number of cases
+  double cum_sum = 0;
+
+  // loop through the data and update cum_sum each time by adding next day number of cases
+  // store the cumulative number of cases that day per 100000 people in array cum
+  for (size_t i = 0; i < n_days; i++) {
+    cum_sum += data[i];
+    cum[i] = cum_sum / (pop / 100000);
+  }
+}
+
+void printCountryWithMax(country_t * countries,
+                         size_t n_countries,
+                         unsigned ** data,
+                         size_t n_days) {
+  // declare a curr_max to record the current max number of daily cases as we loop through all country's time series data
+  // declare a max_idx to update the index of country according to curr_max
+  unsigned curr_max = 0;
+  size_t max_idx = 0;
+
+  // loop through each country's time series data and compare that with curr_max
+  // if it's bigger than or equal to, update that value to curr_max
+  // and also update the max_idx to that country's index
+  for (size_t i = 0; i < n_countries; i++) {
+    for (size_t j = 0; j < n_days; j++) {
+      if (data[i][j] >= curr_max) {
+        curr_max = data[i][j];
+        max_idx = i;
+      }
+    }
+  }
+
+  printf("%s has the most daily cases with %u\n", countries[max_idx].name, curr_max);
+}
+~/ece551/043_eval1 $   // declare a max_idx to update the index of country according to curr_max
+//: command not found
+~/ece551/043_eval1 $ git add ../printCountries test_population.csv 
+fatal: pathspec '../printCountries' did not match any files
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ make printCountries 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+~/ece551/043_eval1 $ make printRunningAvg 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+~/ece551/043_eval1 $ make printCumulative 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+~/ece551/043_eval1 $ make printDailyMax 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+~/ece551/043_eval1 $ cat test_population.csv 
+Country,Population
+asd,184467
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdn,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdna,123
+asjdnaksjdnaskjdnaksjdnajsdnakjsdnajdnaaskdjnaskdjnakjsdnaskjdnasasdasdagscvshgcascghavsghcvgasvcgasvcahsvdhagdasd,123
+7asd,123\n123
+8asd,123\0123
+1asiduak123~/ece551/043_eval1 $ cat testcases.txt 
+#error
+printCountries error.csv
+printDailyMax population.csv
+#success
+printCountries test_population.csv
+printDailyMax population.csv daily_cases.csv
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ ls
+#*eshell*#   daily_cases.csv  pandemic.c~       printCumulative.o    test_population.csv~
+#error.csv#  daily_small.csv  pandemic.h        printDailyMax        testcases.txt
+*eshell*     error.csv        population.csv    printDailyMax.o      testcases.txt~
+*eshell*~    error.csv~       printCountries    printRunningAvg      
+Makefile     grade.txt        printCountries.o  printRunningAvg.o    
+README       pandemic.c       printCumulative   test_population.csv  
+~/ece551/043_eval1 $ rm #*eshell*# *eshell*~
+usage: rm [OPTION]... FILE...
+Remove (unlink) the FILE(s).
+
+    -h, --help           show this usage screen
+    -f, --force          force removal
+    -i, --interactive    prompt before any removal
+    -n, --preview        don't change anything on disk
+    -r, --recursive      remove the contents of directories recursively
+    -R                   (same)
+    -v, --verbose        explain what is being done
+
+This command is implemented in Lisp.  If an unrecognized option is
+passed to this command, the external version ‘/usr/bin/rm’
+will be called instead.
+~/ece551/043_eval1 $ rm *eshell\* 
+~/ece551/043_eval1 $ ls
+#*eshell*#       daily_small.csv  pandemic.h         printDailyMax         testcases.txt
+#error.csv#      error.csv        population.csv     printDailyMax.o       testcases.txt~
+*eshell*~        error.csv~       printCountries     printRunningAvg       
+Makefile         grade.txt        printCountries.o   printRunningAvg.o     
+README           pandemic.c       printCumulative    test_population.csv   
+daily_cases.csv  pandemic.c~      printCumulative.o  test_population.csv~  
+~/ece551/043_eval1 $ rm #*eshell*#
+usage: rm [OPTION]... FILE...
+Remove (unlink) the FILE(s).
+
+    -h, --help           show this usage screen
+    -f, --force          force removal
+    -i, --interactive    prompt before any removal
+    -n, --preview        don't change anything on disk
+    -r, --recursive      remove the contents of directories recursively
+    -R                   (same)
+    -v, --verbose        explain what is being done
+
+This command is implemented in Lisp.  If an unrecognized option is
+passed to this command, the external version ‘/usr/bin/rm’
+will be called instead.
+~/ece551/043_eval1 $ ls
+#*eshell*#       daily_small.csv  pandemic.h         printDailyMax         testcases.txt
+#error.csv#      error.csv        population.csv     printDailyMax.o       testcases.txt~
+*eshell*~        error.csv~       printCountries     printRunningAvg       
+Makefile         grade.txt        printCountries.o   printRunningAvg.o     
+README           pandemic.c       printCumulative    test_population.csv   
+daily_cases.csv  pandemic.c~      printCumulative.o  test_population.csv~  
+~/ece551/043_eval1 $ rm *eshell*~
+~/ece551/043_eval1 $ rm #*eshell*#
+usage: rm [OPTION]... FILE...
+Remove (unlink) the FILE(s).
+
+    -h, --help           show this usage screen
+    -f, --force          force removal
+    -i, --interactive    prompt before any removal
+    -n, --preview        don't change anything on disk
+    -r, --recursive      remove the contents of directories recursively
+    -R                   (same)
+    -v, --verbose        explain what is being done
+
+This command is implemented in Lisp.  If an unrecognized option is
+passed to this command, the external version ‘/usr/bin/rm’
+will be called instead.
+~/ece551/043_eval1 $ ls
+#*eshell*#       daily_small.csv  pandemic.c~       printCumulative    printRunningAvg.o
+#error.csv#      error.csv        pandemic.h        printCumulative.o  test_population.csv
+Makefile         error.csv~       population.csv    printDailyMax      test_population.csv~
+README           grade.txt        printCountries    printDailyMax.o    testcases.txt
+daily_cases.csv  pandemic.c       printCountries.o  printRunningAvg    testcases.txt~
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master c2459cb] Did assignment 43
+ 7 files changed, 3 insertions(+), 447 deletions(-)
+ delete mode 100644 043_eval1/*eshell*
+~/ece551/043_eval1 $ git push
+Enumerating objects: 17, done.
+Counting objects: 100% (17/17), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 882 bytes | 882.00 KiB/s, done.
+Total 9 (delta 8), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   11f41ff..c2459cb  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: c2459cb6d2ca19390eb41b6123403fbba65ed352
+
+Grading this assignment requires 1 eval tokens
+You have 2996 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 399 bytes | 399.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   c2459cb..1d237c4  master     -> origin/master
+Updating c2459cb..1d237c4
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:43:04.361177
+For commit ID c2459cb6d2ca19390eb41b6123403fbba65ed352
+Grading at Wed Oct  5 01:43:01 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+The country name is out of the required length.
+: Success
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ make printCountries 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+*** stack smashing detected ***: terminated
+aborted (core dumped)
+~/ece551/043_eval1 $ make printCountries 
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+The country name is out of the required length.
+: Success
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+The input character in the population is not a digit.
+: Success
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master 76bc0aa] Did assignment 43
+ 2 files changed, 1153 insertions(+), 4 deletions(-)
+ create mode 100644 043_eval1/*eshell*
+~/ece551/043_eval1 $ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 6.76 KiB | 6.76 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   1d237c4..76bc0aa  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 76bc0aa5e65f30f2b7f3416015b67f98e3f6027c
+
+Grading this assignment requires 1 eval tokens
+You have 3000 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 398 bytes | 132.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   76bc0aa..7146cd6  master     -> origin/master
+Updating 76bc0aa..7146cd6
+Fast-forward
+ 043_eval1/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:48:07.075585
+For commit ID 76bc0aa5e65f30f2b7f3416015b67f98e3f6027c
+Grading at Wed Oct  5 01:48:04 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Line_1_did_not_match
+Line_2_did_not_match
+Your file did not match the expected ouput
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ 
+~/ece551/043_eval1 $ ./printCountries test_population.csv 
+country: 123456
+brazil: 123456
+new: 34567
+math: 12345
+~/ece551/043_eval1 $ git add .
+~/ece551/043_eval1 $ git commit -m "Did assignment 43"
+[master f6ed5e4] Did assignment 43
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+~/ece551/043_eval1 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 366 bytes | 366.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   7146cd6..f6ed5e4  master -> master
+~/ece551/043_eval1 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: f6ed5e46917b7dff3d0ad89eb7fee388c5adfac2
+
+Grading this assignment requires 1 eval tokens
+You have 2999 eval remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pull
+Already up to date.
+~/ece551/043_eval1 $ git pulll
+git: 'pulll' is not a git command. See 'git --help'.
+
+The most similar command is
+	pull
+~/ece551/043_eval1 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 418 bytes | 139.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   f6ed5e4..671db31  master     -> origin/master
+Updating f6ed5e4..671db31
+Fast-forward
+ 043_eval1/grade.txt | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+~/ece551/043_eval1 $ cat grade.txt 
+Grading at 10/05/2022:05:50:32.800872
+For commit ID f6ed5e46917b7dff3d0ad89eb7fee388c5adfac2
+Grading at Wed Oct  5 01:50:30 AM EDT 2022
+
+Compiling 
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+Running your test cases
++-----------------------------------------------------------------------+
+Test case printCountries error.csv
+Our printCountries does not consider this an error case
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries test_population.csv
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case printDailyMax population.csv daily_cases.csv
+Your file matched the expected output
+
+You have FAILED one or more of your test cases
+Keep debugging
+
+Overall Grade: NO GRADE YET
+~/ece551/043_eval1 $ 

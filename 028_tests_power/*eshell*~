@@ -1,0 +1,14 @@
+Welcome to the Emacs shell
+
+~/ece551/028_tests_power $ ls
+README  next-README  run_all.sh  test-power.c
+~/ece551/028_tests_power $ ./run_all.sh 
+**Testing broken implementation 10 **
+-------------------------------------
+
+Your power calculation is wrong.
+**Testing broken implementation 11 **
+-------------------------------------
+
+Your test program did not identify /usr/local/ece551/power/power11.o as broken!
+~/ece551/028_tests_power $ 

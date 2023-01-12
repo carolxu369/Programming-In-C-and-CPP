@@ -1,0 +1,69 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char ** argv) {
+  if (argc != 2) {
+    fprintf(stderr, "Usage: encrypt key inputFileName\n");
+    return EXIT_FAILURE;
+  }
+
+  FILE * f = fopen(argv[1], "r");
+  if (f == NULL) {
+    perror("Could not open file");
+    return EXIT_FAILURE;
+  }
+
+  char matrix[10][10];
+
+  // check the input file valid
+  char line[11];
+  while (fgets(line, 11, f) != NULL) {
+    if (strchr(line, '\n') == NULL) {
+      printf("Line is too long.\n");
+      return EXIT_FAILURE;
+    }
+    else if (strchr(line, '\0') != NULL) {
+      printf("Line is too short.\n");
+      return EXIT_FAILURE;
+    }
+  }
+
+  int c;
+
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 11; j++) {
+      c = fgetc(f);
+      if (isprint(c) == 0) {
+        printf("The char is not printable.\n");
+        return EXIT_FAILURE;
+      }
+      if (c == '\n') {
+        continue;
+      }
+      else {
+        matrix[i][j] = c;
+      }
+    }
+  }
+
+  for (int i = 0; i < 10; i++) {
+    for (int j = 9; j >= 0; j--) {
+      printf("%c", matrix[j][i]);
+    }
+    printf("\n");
+  }
+
+  while ((c = fgetc(f)) != EOF) {
+    if (isalpha(c) == 0) {
+      printf("The input value is not char.\n");
+      return EXIT_FAILURE;
+    }
+    else {
+    }
+  }
+
+  fclose(f);
+  return EXIT_SUCCESS;
+}

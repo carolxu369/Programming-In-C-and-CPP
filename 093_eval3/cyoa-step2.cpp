@@ -1,0 +1,119 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <algorithm>
+#include <climits>  // ULONG_MAX
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include "story.hpp"
+
+int main(int argc, char ** argv) {
+  std::vector<NewPage> v_page = cyoa_step1(argc, argv);
+
+  std::vector<std::pair<size_t, size_t> > page_occur;
+
+  // construct the page_occur vector with page_num and the number of occurence of that page
+  for (size_t i = 0; i < v_page.size(); i++) {
+    page_occur.push_back(std::make_pair(v_page[i].get_num(), 0));
+  }
+
+  // check whether every page that is referenced by a choice is valid
+  for (size_t i = 0; i < v_page.size(); i++) {
+    for (size_t j = 0; j < v_page[i].get_v_choice().size(); j++) {
+      if (not_in(v_page[i].get_v_choice()[j].get_next_page(), page_occur) == 1) {
+        std::cerr << "Exist page referenced by a choice is not valid.\n";
+        exit(EXIT_FAILURE);
+      }
+    }
+  }
+
+  int win_page = 0;
+  int lose_page = 0;
+
+  // update the number of reference for each page
+  // update the number of win and lose page in the story
+  for (size_t i = 0; i < v_page.size(); i++) {
+    if (v_page[i].get_type() == "W") {
+      win_page = 1;
+    }
+
+    if (v_page[i].get_type() == "L") {
+      lose_page = 1;
+    }
+
+    for (size_t j = 0; j < v_page[i].get_v_choice().size(); j++) {
+      size_t refer_page = v_page[i].get_v_choice()[j].get_next_page();
+      for (size_t k = 0; k < page_occur.size(); k++) {
+        if (refer_page == page_occur[k].first) {
+          page_occur[k].second++;
+        }
+      }
+    }
+  }
+
+  // check whether every page is referenced by at least one other page's choice
+  for (size_t i = 0; i < page_occur.size(); i++) {
+    if ((page_occur[i].first != 0) && (page_occur[i].second < 1)) {
+      std::cerr << "Exist a page is not referenced by other pages.\n";
+      exit(EXIT_FAILURE);
+    }
+  }
+
+  // check whether the story has at least one win page and one lose page
+  if (win_page == 0) {
+    std::cerr << "The story doesn't have a win page.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  if (lose_page == 0) {
+    std::cerr << "The story doesn't have a lose page.\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // print the result
+  // check whether the story has page 0 to start
+  if (v_page[0].get_num() != 0) {
+    std::cerr << "The story doesn't have page 0.\n";
+    exit(EXIT_FAILURE);
+  }
+  std::string w_l = v_page[0].get_type();
+  std::cout << v_page[0];
+  size_t page_idx = 0;
+
+  while ((w_l != "W") && (w_l != "L")) {
+    std::string user_input;
+    std::getline(std::cin, user_input);
+
+    // check whether the number from the user is a number
+    while ((str_digit(user_input) == 1) || (strtoul(user_input.c_str(), NULL, 10) == 0) ||
+           (strtoul(user_input.c_str(), NULL, 10) >
+            v_page[page_idx].get_v_choice().size())) {
+      std::cin.clear();
+      std::cout << "That is not a valid choice, please try again\n";
+      std::getline(std::cin, user_input);
+    }
+
+    // conver the valid number to size_t
+    size_t user_num = strtoul(user_input.c_str(), NULL, 10);
+
+    // get the next page from user_num
+    size_t n_page = v_page[page_idx].get_v_choice()[user_num - 1].get_next_page();
+    for (size_t i = 0; i < v_page.size(); i++) {
+      // print this page and update loop parameters
+      if (v_page[i].get_num() == n_page) {
+        page_idx = i;
+        w_l = v_page[i].get_type();
+        std::cout << v_page[i];
+        break;
+      }
+    }
+  }
+
+  return EXIT_SUCCESS;
+}

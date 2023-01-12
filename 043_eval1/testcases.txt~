@@ -1,0 +1,6 @@
+#error
+printCountries error.csv
+printDailymax poplutaion.csv
+#success
+printCountries poplutaion.csv
+printDailymax poplutaion.csv daily_small.csv

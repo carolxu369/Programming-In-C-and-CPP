@@ -1,0 +1,1144 @@
+Welcome to the Emacs shell
+
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ ls
+README  answers.txt  test.c
+~/ece551/039_read_arr2 $ cat answers.txt 
+p
+1
+n
+a
+bannana has nana 3 characters into it!
+r
+o
+fduurw
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  test.c
+~/ece551/039_read_arr2 $ make -k
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  test  test.c  test.o
+~/ece551/039_read_arr2 $ ./tet
+./tet: command not found
+~/ece551/039_read_arr2 $ ./test 
+p
+l
+n
+a
+bannana has nana 3 characters into it!
+r
+o
+fduurw
+~/ece551/039_read_arr2 $ rm test test.o
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  test.c
+~/ece551/039_read_arr2 $ git add answers.txt 
+~/ece551/039_read_arr2 $ git add Makefile 
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+[master ff02465] Did assignment 39
+ 2 files changed, 13 insertions(+)
+ create mode 100644 039_read_arr2/Makefile
+ create mode 100644 039_read_arr2/answers.txt
+~/ece551/039_read_arr2 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 544 bytes | 544.00 KiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   8c5555f..ff02465  master -> master
+~/ece551/039_read_arr2 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: ff02465c635c5326cf5750e9f59a8e24d491d23b
+
+Grading this assignment requires 5 c tokens
+You have 100 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/039_read_arr2 $ git pull
+remote: Enumerating objects: 6, done.        
+remote: Counting objects: 100% (6/6), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 2), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 618 bytes | 618.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   ff02465..9f2bd65  master     -> origin/master
+Updating ff02465..9f2bd65
+Fast-forward
+ 039_read_arr2/grade.txt | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 039_read_arr2/grade.txt
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ cat grade.txt 
+Grading at 09/28/2022:12:29:57.382711
+For commit ID ff02465c635c5326cf5750e9f59a8e24d491d23b
+Grading at Wed Sep 28 08:29:57 AM EDT 2022
+Attempting to compile test.c
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+compiled
+I expected to find a file called 'answer.txt' but it did not exist
+(or was not a regular file)
+Here are the files that I can find:
+answers.txt
+Makefile
+README
+test
+test.c
+test.o
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ git add answers.txt 
+~/ece551/039_read_arr2 $ git add Makefile 
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+~/ece551/039_read_arr2 $ git add .
+~/ece551/039_read_arr2 $ git push
+Everything up-to-date
+~/ece551/039_read_arr2 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 9f2bd6508700fd747a8bf5c25e390cd92011b1f7
+
+Grading this assignment requires 5 c tokens
+You have 95 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 406 bytes | 406.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   9f2bd65..2c6520f  master     -> origin/master
+Updating 9f2bd65..2c6520f
+Fast-forward
+ 039_read_arr2/grade.txt | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ cat grade.txt 
+Grading at 09/28/2022:12:31:37.739240
+For commit ID 9f2bd6508700fd747a8bf5c25e390cd92011b1f7
+Grading at Wed Sep 28 08:31:37 AM EDT 2022
+Attempting to compile test.c
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+compiled
+I expected to find a file called 'answer.txt' but it did not exist
+(or was not a regular file)
+Here are the files that I can find:
+answers.txt
+grade.txt
+Makefile
+README
+test
+test.c
+test.o
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/039_read_arr2 $ git add .
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answers.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  answers.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ rm answers.txt 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ git add answer.txt 
+~/ece551/039_read_arr2 $ git add Makefile 
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+[master 094edd3] Did assignment 39
+ 1 file changed, 8 insertions(+)
+ create mode 100644 039_read_arr2/answer.txt
+~/ece551/039_read_arr2 $ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 288 bytes | 288.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   2c6520f..094edd3  master -> master
+~/ece551/039_read_arr2 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    answers.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Please fix the above before requesting grading
+~/ece551/039_read_arr2 $ git add .
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+[master 248aa56] Did assignment 39
+ 1 file changed, 8 deletions(-)
+ delete mode 100644 039_read_arr2/answers.txt
+~/ece551/039_read_arr2 $ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 284 bytes | 284.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   094edd3..248aa56  master -> master
+~/ece551/039_read_arr2 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 248aa562fd2b9c6c8e1c5b4648a7bef76b9167c0
+
+Grading this assignment requires 5 c tokens
+You have 90 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 452 bytes | 452.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   248aa56..b511ada  master     -> origin/master
+Updating 248aa56..b511ada
+Fast-forward
+ 039_read_arr2/grade.txt | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ cat grade.txt 
+Grading at 09/28/2022:12:34:38.110684
+For commit ID 248aa562fd2b9c6c8e1c5b4648a7bef76b9167c0
+Grading at Wed Sep 28 08:34:37 AM EDT 2022
+Attempting to compile test.c
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+compiled
+Line_2_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  grade.txt  test.c
+~/ece551/039_read_arr2 $ cat answer.txt 
+p
+1
+n
+a
+bannana has nana 3 characters into it!
+r
+o
+fduurw
+~/ece551/039_read_arr2 $ make -k
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  grade.txt  test  test.c  test.o
+~/ece551/039_read_arr2 $ ./test 
+p
+l
+n
+a
+bannana has nana 3 characters into it!
+r
+o
+fduurw
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ 
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  answer.txt~  grade.txt  test  test.c  test.o
+~/ece551/039_read_arr2 $ cat answer.txt 
+p
+l
+n
+a
+bannana has nana 3 characters into it!
+r
+o
+fduurw
+~/ece551/039_read_arr2 $ rm test test.o
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  answer.txt~  grade.txt  test.c
+~/ece551/039_read_arr2 $ git add answer.txt 
+~/ece551/039_read_arr2 $ git commit -m "Did assignment 39"
+[master 25b11c2] Did assignment 39
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/039_read_arr2 $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 373 bytes | 373.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   b511ada..25b11c2  master -> master
+~/ece551/039_read_arr2 $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 25b11c2b8c2d75241dc81b96a721adff9e5d68c0
+
+Grading this assignment requires 5 c tokens
+You have 85 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+Already up to date.
+~/ece551/039_read_arr2 $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 2), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 519 bytes | 259.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   25b11c2..61e1d8e  master     -> origin/master
+Updating 25b11c2..61e1d8e
+Fast-forward
+ 039_read_arr2/grade.txt | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+~/ece551/039_read_arr2 $ ls
+Makefile  README  answer.txt  answer.txt~  grade.txt  test.c
+~/ece551/039_read_arr2 $ cat grade.txt 
+Grading at 09/28/2022:12:36:38.460485
+For commit ID 25b11c2b8c2d75241dc81b96a721adff9e5d68c0
+Grading at Wed Sep 28 08:36:38 AM EDT 2022
+Attempting to compile test.c
+gcc -Wall -Werror -pedantic -std=gnu99 -c test.c
+gcc -o test test.o 
+compiled
+Your file matched the expected output
+Your output matched what we expected
+
+Overall Grade: A
+~/ece551/039_read_arr2 $ git pull
+remote: Enumerating objects: 6, done.        
+remote: Counting objects: 100% (6/6), done.        
+remote: Compressing objects: 100% (5/5), done.        
+remote: Total 5 (delta 1), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (5/5), 1.07 KiB | 1.07 MiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   61e1d8e..b922a90  master     -> origin/master
+Updating 61e1d8e..b922a90
+Fast-forward
+ 040_id_mem_errors/README   | 31 +++++++++++++++++++++++++++++++
+ 040_id_mem_errors/broken.c | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 040_id_mem_errors/README
+ create mode 100644 040_id_mem_errors/broken.c
+~/ece551/039_read_arr2 $ cd ..
+~/ece551 $ ls
+#README#       007_fix_syntax  015_code1         023_tests_match5  031_read_ptr1     039_read_arr2
+000_submit     008_ch03_rq     016_code2         024_tests_prime   032_read_ptr2     040_id_mem_errors
+001_app_rq     009_read3       017_squares       025_debugging     033_ch09_rq       README.txt
+002_ch01_rq    010_read4       018_read_squares  026_ch07_rq       034_read_arr1     
+003_algorithm  011_numbers     019_ch05_rq       027_read_rec1     035_array_max     
+004_ch02_rq    012_comp_arith  020_retirement    028_tests_power   036_tests_subseq  
+005_read1      013_complex_ty  021_rectangle     029_power_rec     037_array_subseq  
+006_read2      014_ch04_rq     022_ch06_rq       030_ch08_rq       038_ch10_rq       
+~/ece551 $ cd 040_id_mem_errors/
+~/ece551/040_id_mem_errors $ ls
+README  broken.c
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  broken.c
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master d786ec2] Did assignment 40
+ 1 file changed, 6 insertions(+)
+ create mode 100644 040_id_mem_errors/answer.txt
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 449 bytes | 449.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   b922a90..d786ec2  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: d786ec27041a7d1b64acfff201bd4836868001ef
+
+Grading this assignment requires 5 c tokens
+You have 100 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 6, done.        
+remote: Counting objects: 100% (6/6), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 2), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 509 bytes | 509.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   d786ec2..5b9a192  master     -> origin/master
+Updating d786ec2..5b9a192
+Fast-forward
+ 040_id_mem_errors/grade.txt | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 040_id_mem_errors/grade.txt
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:12:58:01.457318
+For commit ID d786ec27041a7d1b64acfff201bd4836868001ef
+Grading at Wed Sep 28 08:58:01 AM EDT 2022
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master ede23d5] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 349 bytes | 349.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   5b9a192..ede23d5  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: ede23d551d1c922ae817b24a60df162188ffa244
+
+Grading this assignment requires 5 c tokens
+You have 95 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 394 bytes | 394.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   ede23d5..fa8e496  master     -> origin/master
+Updating ede23d5..fa8e496
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:02:22.068147
+For commit ID ede23d551d1c922ae817b24a60df162188ffa244
+Grading at Wed Sep 28 09:02:21 AM EDT 2022
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master 5f7f17d] Did assignment 40
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 402 bytes | 402.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   fa8e496..5f7f17d  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 5f7f17dcd5f4a6a036995e2a1b2d8a595b7f98bb
+
+Grading this assignment requires 5 c tokens
+You have 90 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 395 bytes | 395.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   5f7f17d..9c7ae16  master     -> origin/master
+Updating 5f7f17d..9c7ae16
+Fast-forward
+ 040_id_mem_errors/grade.txt | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:09:52.659403
+For commit ID 5f7f17dcd5f4a6a036995e2a1b2d8a595b7f98bb
+Grading at Wed Sep 28 09:09:52 AM EDT 2022
+Line_1_did_not_match
+Line_3_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ ls
+#*eshell*#  *eshell*  README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat answer.txt 
+16 return dangling pointer
+19 use of uninitialized value
+20 use of dangling pointer
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master c6e4c93] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 348 bytes | 348.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   9c7ae16..c6e4c93  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	*eshell*
+
+nothing added to commit but untracked files present (use "git add" to track)
+Please fix the above before requesting grading
+~/ece551/040_id_mem_errors $ git push
+Everything up-to-date
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	*eshell*
+
+nothing added to commit but untracked files present (use "git add" to track)
+Please fix the above before requesting grading
+~/ece551/040_id_mem_errors $ ls
+#*eshell*#  *eshell*  README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ rm *eshell*
+~/ece551/040_id_mem_errors $ git push
+Everything up-to-date
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: c6e4c93a65da9ed554d93c686132f697880b9769
+
+Grading this assignment requires 5 c tokens
+You have 85 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 391 bytes | 391.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   c6e4c93..af0d157  master     -> origin/master
+Updating c6e4c93..af0d157
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:12:42.919809
+For commit ID c6e4c93a65da9ed554d93c686132f697880b9769
+Grading at Wed Sep 28 09:12:42 AM EDT 2022
+Line_1_did_not_match
+Line_3_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ cat answer.txt 
+16 return dangling pointer
+19 use of uninitialized value
+20 use of dangling pointer
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master 0c738b8] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 347 bytes | 347.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   af0d157..0c738b8  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 0c738b8fdb6ec8efce31526cbbe1dfeb0ef91792
+
+Grading this assignment requires 5 c tokens
+You have 80 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 391 bytes | 391.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   0c738b8..ff37bc0  master     -> origin/master
+Updating 0c738b8..ff37bc0
+Fast-forward
+ 040_id_mem_errors/grade.txt | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:15:53.209317
+For commit ID 0c738b8fdb6ec8efce31526cbbe1dfeb0ef91792
+Grading at Wed Sep 28 09:15:53 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ ls
+#*eshell*#  README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat answer.txt 
+16 return dangling pointer
+19 use of uninitialized value
+20 use of uninitialized value
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ cat answer.txt 
+16 use of uninitialized value
+19 use of uninitialized value
+20 use of uninitialized value
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master 7e66e59] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 350 bytes | 350.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   ff37bc0..7e66e59  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	*eshell*
+
+nothing added to commit but untracked files present (use "git add" to track)
+Please fix the above before requesting grading
+~/ece551/040_id_mem_errors $ rm *eshell*
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 7e66e59f60c2280a45d179564a5e1383f44ca281
+
+Grading this assignment requires 5 c tokens
+You have 95 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ ls
+README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 389 bytes | 389.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   7e66e59..8ab6bc1  master     -> origin/master
+Updating 7e66e59..8ab6bc1
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:21:03.518442
+For commit ID 7e66e59f60c2280a45d179564a5e1383f44ca281
+Grading at Wed Sep 28 09:21:03 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ cat answer.txt 
+16 use of uninitialized value
+19 use of uninitialized value
+20 use of uninitialized value
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master c9e9a07] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 349 bytes | 349.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   8ab6bc1..c9e9a07  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: c9e9a07f26651f74e9d228000a68241887d6a367
+
+Grading this assignment requires 5 c tokens
+You have 90 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 389 bytes | 389.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   c9e9a07..f255f1b  master     -> origin/master
+Updating c9e9a07..f255f1b
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:22:13.770201
+For commit ID c9e9a07f26651f74e9d228000a68241887d6a367
+Grading at Wed Sep 28 09:22:13 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master d002bab] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ ls
+#*eshell*#  README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 350 bytes | 350.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   f255f1b..d002bab  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: d002babcaa499db6f8896a0baa0d5f3c194c5f71
+
+Grading this assignment requires 5 c tokens
+You have 85 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 387 bytes | 387.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   d002bab..57c1071  master     -> origin/master
+Updating d002bab..57c1071
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:25:54.041349
+For commit ID d002babcaa499db6f8896a0baa0d5f3c194c5f71
+Grading at Wed Sep 28 09:25:53 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master e3fd83a] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 353 bytes | 353.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   57c1071..e3fd83a  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: e3fd83ae576ba4e67841f4591fc506e6c0a78130
+
+Grading this assignment requires 5 c tokens
+You have 80 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pulll
+git: 'pulll' is not a git command. See 'git --help'.
+
+The most similar command is
+	pull
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 387 bytes | 387.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   e3fd83a..cb8ae42  master     -> origin/master
+Updating e3fd83a..cb8ae42
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:27:04.317136
+For commit ID e3fd83ae576ba4e67841f4591fc506e6c0a78130
+Grading at Wed Sep 28 09:27:04 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ ls
+#*eshell*#  README  answer.txt  answer.txt~  broken.c  grade.txt
+~/ece551/040_id_mem_errors $ cat answer.txt 
+8 use of dangling pointer
+19 use of uninitialized value
+20 use of uninitialized value
+19 index out of bounds
+23 return dangling pointer
+28 use of dangling pointer
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master 06f4c23] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 347 bytes | 347.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   cb8ae42..06f4c23  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 06f4c233e2759b96a4566a99c1f576eb7fcab3e2
+
+Grading this assignment requires 5 c tokens
+You have 75 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 388 bytes | 388.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   06f4c23..39a19f9  master     -> origin/master
+Updating 06f4c23..39a19f9
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:31:26.683992
+For commit ID 06f4c233e2759b96a4566a99c1f576eb7fcab3e2
+Grading at Wed Sep 28 09:31:26 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ git add answer.txt 
+~/ece551/040_id_mem_errors $ git commit -m "Did assignment 40"
+[master 9768b20] Did assignment 40
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+~/ece551/040_id_mem_errors $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 350 bytes | 350.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+To /usr/local/assignments/jx139/ece551
+   39a19f9..9768b20  master -> master
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	*eshell*
+
+nothing added to commit but untracked files present (use "git add" to track)
+Please fix the above before requesting grading
+~/ece551/040_id_mem_errors $ rm *eshell*
+~/ece551/040_id_mem_errors $ git push
+Everything up-to-date
+~/ece551/040_id_mem_errors $ grade
+Checking 'git status'....
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+Checking HEAD commit ID....
+Commit ID to grade: 9768b2053073a5f84374ecd9732a3a5704a4d1bb
+
+Grading this assignment requires 5 c tokens
+You have 70 c remaining
+Do you wish to continue? y
+Grading happening now
+~/ece551/040_id_mem_errors $ git pull
+Already up to date.
+~/ece551/040_id_mem_errors $ git pull
+remote: Enumerating objects: 7, done.        
+remote: Counting objects: 100% (7/7), done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 4 (delta 3), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (4/4), 390 bytes | 390.00 KiB/s, done.
+From /usr/local/assignments/jx139/ece551
+   9768b20..18f2ba7  master     -> origin/master
+Updating 9768b20..18f2ba7
+Fast-forward
+ 040_id_mem_errors/grade.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+~/ece551/040_id_mem_errors $ cat grade.txt 
+Grading at 09/28/2022:13:32:46.983188
+For commit ID 9768b2053073a5f84374ecd9732a3a5704a4d1bb
+Grading at Wed Sep 28 09:32:46 AM EDT 2022
+Line_1_did_not_match
+Your file did not match the expected ouput
+Your output did not match what we expected.
+
+Overall Grade: F
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 
+~/ece551/040_id_mem_errors $ 

@@ -1,0 +1,1264 @@
+Welcome to the Emacs shell
+
+~/ece551/060_eval2 $ git add .
+~/ece551/060_eval2 $ git commit -m "Did assignment 60"
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+~/ece551/060_eval2 $ git push
+To /usr/local/assignments/jx139/ece551
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to '/usr/local/assignments/jx139/ece551'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+~/ece551/060_eval2 $ valgrind ./story-step4 -n words.txt story2.txt 
+==3499629== Memcheck, a memory error detector
+==3499629== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3499629== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3499629== Command: ./story-step4 -n words.txt story2.txt
+==3499629== 
+Once upon a time, there was a walrus. This walrus lived in a very
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3499629== 
+==3499629== HEAP SUMMARY:
+==3499629==     in use at exit: 43 bytes in 6 blocks
+==3499629==   total heap usage: 200 allocs, 194 frees, 11,797 bytes allocated
+==3499629== 
+==3499629== LEAK SUMMARY:
+==3499629==    definitely lost: 43 bytes in 6 blocks
+==3499629==    indirectly lost: 0 bytes in 0 blocks
+==3499629==      possibly lost: 0 bytes in 0 blocks
+==3499629==    still reachable: 0 bytes in 0 blocks
+==3499629==         suppressed: 0 bytes in 0 blocks
+==3499629== Rerun with --leak-check=full to see details of leaked memory
+==3499629== 
+==3499629== For lists of detected and suppressed errors, rerun with: -s
+==3499629== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ valgrind --leak-check=full ./story-step4 -n words.txt story2.txt
+==3502688== Memcheck, a memory error detector
+==3502688== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3502688== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3502688== Command: ./story-step4 -n words.txt story2.txt
+==3502688== 
+Once upon a time, there was a walrus. This walrus lived in a very
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3502688== 
+==3502688== HEAP SUMMARY:
+==3502688==     in use at exit: 43 bytes in 6 blocks
+==3502688==   total heap usage: 200 allocs, 194 frees, 11,797 bytes allocated
+==3502688== 
+==3502688== 21 bytes in 3 blocks are definitely lost in loss record 1 of 2
+==3502688==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3502688==    by 0x490B60E: strdup (strdup.c:42)
+==3502688==    by 0x10A2B1: get_catarray_t (rand_story.c:116)
+==3502688==    by 0x109523: main (story-step4.c:34)
+==3502688== 
+==3502688== 22 bytes in 3 blocks are definitely lost in loss record 2 of 2
+==3502688==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3502688==    by 0x490B60E: strdup (strdup.c:42)
+==3502688==    by 0x10A234: get_catarray_t (rand_story.c:99)
+==3502688==    by 0x109523: main (story-step4.c:34)
+==3502688== 
+==3502688== LEAK SUMMARY:
+==3502688==    definitely lost: 43 bytes in 6 blocks
+==3502688==    indirectly lost: 0 bytes in 0 blocks
+==3502688==      possibly lost: 0 bytes in 0 blocks
+==3502688==    still reachable: 0 bytes in 0 blocks
+==3502688==         suppressed: 0 bytes in 0 blocks
+==3502688== 
+==3502688== For lists of detected and suppressed errors, rerun with: -s
+==3502688== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ ==3502688==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3502688==: command not found
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ ==3502688== LEAK SUMMARY:
+==3502688==: command not found
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ ls
+#*eshell*#    Makefile~   provided.o    story-step1     story-step2.c   story-step3.c~  story.txt
+#.gitignore#  README      rand_story.c  story-step1.c   story-step2.c~  story-step4     story2.txt
+*eshell*      grade.txt   rand_story.h  story-step1.c~  story-step3     story-step4.c   tests.txt
+Makefile      provided.h  rand_story.o  story-step2     story-step3.c   story-step4.c~  words.txt
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+story-step4.c:1:8: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+    1 | include<ctype.h>
+      |        ^
+In file included from /usr/include/stdio.h:43,
+                 from story-step4.c:3:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:95:3: error: unknown type name ‘size_t’
+   95 |   size_t __pad5;
+      |   ^~~~~~
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:98:67: error: ‘size_t’ undeclared here (not in a function)
+   98 |   char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
+      |                                                                   ^~~~~~
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | /* Copyright (C) 1991-2022 Free Software Foundation, Inc.
+In file included from story-step4.c:3:
+/usr/include/stdio.h:308:35: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  308 | extern FILE *fmemopen (void *__s, size_t __len, const char *__modes)
+      |                                   ^~~~~~
+/usr/include/stdio.h:314:47: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  314 | extern FILE *open_memstream (char **__bufloc, size_t *__sizeloc) __THROW
+      |                                               ^~~~~~
+/usr/include/stdio.h:333:34: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  333 |                     int __modes, size_t __n) __THROW;
+      |                                  ^~~~~~
+/usr/include/stdio.h:339:24: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  339 |                        size_t __size) __THROW;
+      |                        ^~~~~~
+/usr/include/stdio.h:378:44: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  378 | extern int snprintf (char *__restrict __s, size_t __maxlen,
+      |                                            ^~~~~~
+/usr/include/stdio.h:382:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  382 | extern int vsnprintf (char *__restrict __s, size_t __maxlen,
+      |                                             ^~~~~~
+In file included from story-step4.c:3:
+/usr/include/stdio.h:633:30: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  633 |                              size_t *__restrict __n, int __delimiter,
+      |                              ^~~~~~
+/usr/include/stdio.h:636:28: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  636 |                            size_t *__restrict __n, int __delimiter,
+      |                            ^~~~~~
+/usr/include/stdio.h:646:27: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  646 |                           size_t *__restrict __n,
+      |                           ^~~~~~
+/usr/include/stdio.h:675:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fread’
+  675 | extern size_t fread (void *__restrict __ptr, size_t __size,
+      |               ^~~~~
+/usr/include/stdio.h:681:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fwrite’
+  681 | extern size_t fwrite (const void *__restrict __ptr, size_t __size,
+      |               ^~~~~~
+/usr/include/stdio.h:702:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fread_unlocked’
+  702 | extern size_t fread_unlocked (void *__restrict __ptr, size_t __size,
+      |               ^~~~~~~~~~~~~~
+/usr/include/stdio.h:704:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fwrite_unlocked’
+  704 | extern size_t fwrite_unlocked (const void *__restrict __ptr, size_t __size,
+      |               ^~~~~~~~~~~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:98:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘__ctype_get_mb_cur_max’
+   98 | extern size_t __ctype_get_mb_cur_max (void) __THROW __wur;
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:412:25: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  412 |                         size_t __statelen) __THROW __nonnull ((2));
+      |                         ^~~~~~
+/usr/include/stdlib.h:442:25: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  442 |                         size_t __statelen,
+      |                         ^~~~~~
+/usr/include/stdlib.h:540:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  540 | extern void *malloc (size_t __size) __THROW __attribute_malloc__
+      |                      ^~~~~~
+/usr/include/stdlib.h:543:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |                      ^~~~~~
+/usr/include/stdlib.h:543:38: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |                                      ^~~~~~
+/usr/include/stdlib.h:551:36: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  551 | extern void *realloc (void *__ptr, size_t __size)
+      |                                    ^~~~~~
+/usr/include/stdlib.h:563:41: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  563 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                         ^~~~~~
+/usr/include/stdlib.h:563:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  563 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                                         ^~~~~~
+/usr/include/stdlib.h:569:41: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  569 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                         ^~~~~~
+/usr/include/stdlib.h:569:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  569 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                                         ^~~~~~
+In file included from /usr/include/stdlib.h:574,
+                 from story-step4.c:4:
+/usr/include/alloca.h:32:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   32 | extern void *alloca (size_t __size) __THROW;
+      |                      ^~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:580:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  580 | extern void *valloc (size_t __size) __THROW __attribute_malloc__
+      |                      ^~~~~~
+/usr/include/stdlib.h:586:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  586 | extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:586:65: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  586 | extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+      |                                                                 ^~~~~~
+/usr/include/stdlib.h:829:23: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  829 |                       size_t __nmemb, size_t __size, __compar_fn_t __compar)
+      |                       ^~~~~~
+/usr/include/stdlib.h:829:39: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  829 |                       size_t __nmemb, size_t __size, __compar_fn_t __compar)
+      |                                       ^~~~~~
+/usr/include/stdlib.h:838:34: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  838 | extern void qsort (void *__base, size_t __nmemb, size_t __size,
+      |                                  ^~~~~~
+/usr/include/stdlib.h:838:50: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  838 | extern void qsort (void *__base, size_t __nmemb, size_t __size,
+      |                                                  ^~~~~~
+/usr/include/stdlib.h:912:20: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  912 |                    size_t __len) __THROW __nonnull ((3, 4, 5));
+      |                    ^~~~~~
+/usr/include/stdlib.h:915:20: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  915 |                    size_t __len) __THROW __nonnull ((3, 4, 5));
+      |                    ^~~~~~
+/usr/include/stdlib.h:919:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  919 |                     char *__restrict __buf, size_t __len)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:923:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  923 |                     char *__restrict __buf, size_t __len)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:930:36: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  930 | extern int mblen (const char *__s, size_t __n) __THROW;
+      |                                    ^~~~~~
+/usr/include/stdlib.h:934:48: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  934 |                    const char *__restrict __s, size_t __n) __THROW;
+      |                                                ^~~~~~
+/usr/include/stdlib.h:941:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘mbstowcs’
+  941 | extern size_t mbstowcs (wchar_t *__restrict  __pwcs,
+      |               ^~~~~~~~
+/usr/include/stdlib.h:945:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘wcstombs’
+  945 | extern size_t wcstombs (char *__restrict __s,
+      |               ^~~~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:44:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   44 |                      size_t __n) __THROW __nonnull ((1, 2));
+      |                      ^~~~~~
+/usr/include/string.h:47:56: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   47 | extern void *memmove (void *__dest, const void *__src, size_t __n)
+      |                                                        ^~~~~~
+/usr/include/string.h:55:32: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   55 |                       int __c, size_t __n)
+      |                                ^~~~~~
+/usr/include/string.h:61:42: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   61 | extern void *memset (void *__s, int __c, size_t __n) __THROW __nonnull ((1));
+      |                                          ^~~~~~
+/usr/include/string.h:64:56: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   64 | extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+      |                                                        ^~~~~~
+/usr/include/string.h:80:60: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   80 | extern int __memcmpeq (const void *__s1, const void *__s2, size_t __n)
+      |                                                            ^~~~~~
+/usr/include/string.h:107:48: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  107 | extern void *memchr (const void *__s, int __c, size_t __n)
+      |                                                ^~~~~~
+/usr/include/string.h:145:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  145 |                       const char *__restrict __src, size_t __n)
+      |                                                     ^~~~~~
+/usr/include/string.h:153:23: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  153 |                       size_t __n) __THROW __nonnull ((1, 2));
+      |                       ^~~~~~
+/usr/include/string.h:159:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  159 | extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+      |                                                         ^~~~~~
+/usr/include/string.h:166:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strxfrm’
+  166 | extern size_t strxfrm (char *__restrict __dest,
+      |               ^~~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:179:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strxfrm_l’
+  179 | extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
+      |               ^~~~~~~~~
+/usr/include/string.h:195:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  195 | extern char *strndup (const char *__string, size_t __n)
+      |                                             ^~~~~~
+/usr/include/string.h:293:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strcspn’
+  293 | extern size_t strcspn (const char *__s, const char *__reject)
+      |               ^~~~~~~
+/usr/include/string.h:297:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strspn’
+  297 | extern size_t strspn (const char *__s, const char *__accept)
+      |               ^~~~~~
+/usr/include/string.h:407:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strlen’
+  407 | extern size_t strlen (const char *__s)
+      |               ^~~~~~
+/usr/include/string.h:413:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strnlen’
+  413 | extern size_t strnlen (const char *__string, size_t __maxlen)
+      |               ^~~~~~~
+In file included from /usr/include/features.h:486,
+                 from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33,
+                 from /usr/include/limits.h:26,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:203,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:7,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:34,
+                 from story-step4.c:2:
+/usr/include/string.h:432:12: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  432 | extern int __REDIRECT_NTH (strerror_r,
+      |            ^~~~~~~~~~~~~~
+In file included from /usr/include/string.h:462,
+                 from story-step4.c:5:
+/usr/include/strings.h:34:54: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   34 | extern int bcmp (const void *__s1, const void *__s2, size_t __n)
+      |                                                      ^~~~~~
+/usr/include/strings.h:38:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   38 | extern void bcopy (const void *__src, void *__dest, size_t __n)
+      |                                                     ^~~~~~
+/usr/include/strings.h:42:31: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   42 | extern void bzero (void *__s, size_t __n) __THROW __nonnull ((1));
+      |                               ^~~~~~
+/usr/include/strings.h:120:61: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  120 | extern int strncasecmp (const char *__s1, const char *__s2, size_t __n)
+      |                                                             ^~~~~~
+/usr/include/strings.h:134:27: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  134 |                           size_t __n, locale_t __loc)
+      |                           ^~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:466:40: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  466 | extern void explicit_bzero (void *__s, size_t __n) __THROW __nonnull ((1))
+      |                                        ^~~~~~
+/usr/include/string.h:497:55: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  497 |                         const char *__restrict __src, size_t __n)
+      |                                                       ^~~~~~
+/usr/include/string.h:500:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  500 |                       const char *__restrict __src, size_t __n)
+      |                                                     ^~~~~~
+In file included from rand_story.h:10,
+                 from story-step4.c:7:
+provided.h:9:3: error: expected specifier-qualifier-list before ‘size_t’
+    9 |   size_t n_words;
+      |   ^~~~~~
+provided.h:15:3: error: expected specifier-qualifier-list before ‘size_t’
+   15 |   size_t n;
+      |   ^~~~~~
+story-step4.c: In function ‘main’:
+story-step4.c:38:31: error: implicit declaration of function ‘malloc’ [-Werror=implicit-function-declaration]
+   38 |     category_t * back_words = malloc(sizeof(*back_words));
+      |                               ^~~~~~
+story-step4.c:8:1: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+    7 | #include "rand_story.h"
+  +++ |+#include <stdlib.h>
+    8 |     // use the header files from eval 1
+story-step4.c:38:31: error: incompatible implicit declaration of built-in function ‘malloc’ [-Werror=builtin-declaration-mismatch]
+   38 |     category_t * back_words = malloc(sizeof(*back_words));
+      |                               ^~~~~~
+story-step4.c:38:31: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+story-step4.c:40:17: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+   40 |     back_words->n_words = 0;
+      |                 ^~~~~~~
+      |                 words
+story-step4.c:41:44: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+   41 |     back_words->words = malloc(back_words->n_words * sizeof(*back_words->words));
+      |                                            ^~~~~~~
+      |                                            words
+story-step4.c:46:11: error: expected ‘;’ before ‘sz’
+   46 |     size_t sz = 0;
+      |           ^~~
+      |           ;
+story-step4.c:48:12: error: implicit declaration of function ‘getline’ [-Werror=implicit-function-declaration]
+   48 |     while (getline(&line, &sz, f_story) >= 0) {
+      |            ^~~~~~~
+story-step4.c:48:28: error: ‘sz’ undeclared (first use in this function)
+   48 |     while (getline(&line, &sz, f_story) >= 0) {
+      |                            ^~
+story-step4.c:48:28: note: each undeclared identifier is reported only once for each function it appears in
+story-step4.c:49:13: error: expected ‘;’ before ‘len’
+   49 |       size_t len = strlen(line);
+      |             ^~~~
+      |             ;
+story-step4.c:53:18: error: expected ‘;’ before ‘i’
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                  ^~
+      |                  ;
+story-step4.c:53:26: error: ‘i’ undeclared (first use in this function)
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                          ^
+story-step4.c:53:30: error: ‘len’ undeclared (first use in this function)
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                              ^~~
+story-step4.c:70:17: error: expected ‘;’ before ‘count’
+   70 |           size_t count = 1;
+      |                 ^~~~~~
+      |                 ;
+story-step4.c:71:22: error: implicit declaration of function ‘realloc’ [-Werror=implicit-function-declaration]
+   71 |           cat_name = realloc(cat_name, count * sizeof(*cat_name));
+      |                      ^~~~~~~
+story-step4.c:71:22: note: include ‘<stdlib.h>’ or provide a declaration of ‘realloc’
+story-step4.c:71:22: error: incompatible implicit declaration of built-in function ‘realloc’ [-Werror=builtin-declaration-mismatch]
+story-step4.c:71:22: note: include ‘<stdlib.h>’ or provide a declaration of ‘realloc’
+story-step4.c:71:40: error: ‘count’ undeclared (first use in this function); did you mean ‘_count’?
+   71 |           cat_name = realloc(cat_name, count * sizeof(*cat_name));
+      |                                        ^~~~~
+      |                                        _count
+story-step4.c:92:17: error: expected ‘;’ before ‘int_count’
+   92 |           size_t int_count = 1;
+      |                 ^~~~~~~~~~
+      |                 ;
+story-step4.c:93:38: error: ‘int_count’ undeclared (first use in this function); did you mean ‘_count’?
+   93 |           cat_int = realloc(cat_int, int_count * sizeof(*cat_int));
+      |                                      ^~~~~~~~~
+      |                                      _count
+story-step4.c:131:15: error: implicit declaration of function ‘strlen’ [-Werror=implicit-function-declaration]
+  131 |           if (strlen(cat_int) > 0) {
+      |               ^~~~~~
+story-step4.c:8:1: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+    7 | #include "rand_story.h"
+  +++ |+#include <string.h>
+    8 |     // use the header files from eval 1
+story-step4.c:131:15: error: incompatible implicit declaration of built-in function ‘strlen’ [-Werror=builtin-declaration-mismatch]
+  131 |           if (strlen(cat_int) > 0) {
+      |               ^~~~~~
+story-step4.c:131:15: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+story-step4.c:132:19: error: expected ‘;’ before ‘back_int’
+  132 |             size_t back_int = atoi(cat_int);
+      |                   ^~~~~~~~~
+      |                   ;
+story-step4.c:134:17: error: ‘back_int’ undeclared (first use in this function)
+  134 |             if (back_int >= 1) {
+      |                 ^~~~~~~~
+story-step4.c:135:42: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  135 |               if (back_int > back_words->n_words) {
+      |                                          ^~~~~~~
+      |                                          words
+story-step4.c:142:66: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  142 |                 curr_back = strdup(back_words->words[back_words->n_words - back_int]);
+      |                                                                  ^~~~~~~
+      |                                                                  words
+story-step4.c:146:29: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  146 |                 back_words->n_words++;
+      |                             ^~~~~~~
+      |                             words
+story-step4.c:148:52: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  148 |                     back_words->words, back_words->n_words * sizeof(*back_words->words));
+      |                                                    ^~~~~~~
+      |                                                    words
+story-step4.c:149:47: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  149 |                 back_words->words[back_words->n_words - 1] = strdup(curr_back);
+      |                                               ^~~~~~~
+      |                                               words
+story-step4.c:160:24: error: expected ‘;’ before ‘i’
+  160 |             for (size_t i = 0; i < cat_array->n; i++) {
+      |                        ^~
+      |                        ;
+story-step4.c:160:45: error: ‘catarray_t’ {aka ‘struct catarray_tag’} has no member named ‘n’
+  160 |             for (size_t i = 0; i < cat_array->n; i++) {
+      |                                             ^~
+story-step4.c:162:28: error: expected ‘;’ before ‘j’
+  162 |                 for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+      |                            ^~
+      |                            ;
+story-step4.c:162:36: error: ‘j’ undeclared (first use in this function)
+  162 |                 for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+      |                                    ^
+story-step4.c:164:32: error: expected ‘;’ before ‘h’
+  164 |                     for (size_t h = j; h < cat_array->arr[i].n_words - 1; h++) {
+      |                                ^~
+      |                                ;
+story-step4.c:164:40: error: ‘h’ undeclared (first use in this function)
+  164 |                     for (size_t h = j; h < cat_array->arr[i].n_words - 1; h++) {
+      |                                        ^
+story-step4.c:180:25: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  180 |             back_words->n_words++;
+      |                         ^~~~~~~
+      |                         words
+story-step4.c:182:53: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  182 |                                         back_words->n_words * sizeof(*back_words->words));
+      |                                                     ^~~~~~~
+      |                                                     words
+story-step4.c:183:43: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  183 |             back_words->words[back_words->n_words - 1] = strdup(curr_word);
+      |                                           ^~~~~~~
+      |                                           words
+cc1: all warnings being treated as errors
+make: *** [Makefile:8: story-step4.o] Error 1
+make: Target 'all' not remade because of errors.
+~/ece551/060_eval2 $ /usr/include/stdlib.h:829:39: error: expected declaration specifiers or ‘...’ before ‘size_t’
+/usr/include/stdlib.h:829:39:: command not found
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+story-step4.c:1:8: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+    1 | include<ctype.h>
+      |        ^
+In file included from /usr/include/stdio.h:43,
+                 from story-step4.c:3:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:95:3: error: unknown type name ‘size_t’
+   95 |   size_t __pad5;
+      |   ^~~~~~
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:98:67: error: ‘size_t’ undeclared here (not in a function)
+   98 |   char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
+      |                                                                   ^~~~~~
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | /* Copyright (C) 1991-2022 Free Software Foundation, Inc.
+In file included from story-step4.c:3:
+/usr/include/stdio.h:308:35: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  308 | extern FILE *fmemopen (void *__s, size_t __len, const char *__modes)
+      |                                   ^~~~~~
+/usr/include/stdio.h:314:47: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  314 | extern FILE *open_memstream (char **__bufloc, size_t *__sizeloc) __THROW
+      |                                               ^~~~~~
+/usr/include/stdio.h:333:34: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  333 |                     int __modes, size_t __n) __THROW;
+      |                                  ^~~~~~
+/usr/include/stdio.h:339:24: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  339 |                        size_t __size) __THROW;
+      |                        ^~~~~~
+/usr/include/stdio.h:378:44: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  378 | extern int snprintf (char *__restrict __s, size_t __maxlen,
+      |                                            ^~~~~~
+/usr/include/stdio.h:382:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  382 | extern int vsnprintf (char *__restrict __s, size_t __maxlen,
+      |                                             ^~~~~~
+In file included from story-step4.c:3:
+/usr/include/stdio.h:633:30: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  633 |                              size_t *__restrict __n, int __delimiter,
+      |                              ^~~~~~
+/usr/include/stdio.h:636:28: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  636 |                            size_t *__restrict __n, int __delimiter,
+      |                            ^~~~~~
+/usr/include/stdio.h:646:27: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  646 |                           size_t *__restrict __n,
+      |                           ^~~~~~
+/usr/include/stdio.h:675:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fread’
+  675 | extern size_t fread (void *__restrict __ptr, size_t __size,
+      |               ^~~~~
+/usr/include/stdio.h:681:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fwrite’
+  681 | extern size_t fwrite (const void *__restrict __ptr, size_t __size,
+      |               ^~~~~~
+/usr/include/stdio.h:702:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fread_unlocked’
+  702 | extern size_t fread_unlocked (void *__restrict __ptr, size_t __size,
+      |               ^~~~~~~~~~~~~~
+/usr/include/stdio.h:704:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘fwrite_unlocked’
+  704 | extern size_t fwrite_unlocked (const void *__restrict __ptr, size_t __size,
+      |               ^~~~~~~~~~~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:98:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘__ctype_get_mb_cur_max’
+   98 | extern size_t __ctype_get_mb_cur_max (void) __THROW __wur;
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:412:25: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  412 |                         size_t __statelen) __THROW __nonnull ((2));
+      |                         ^~~~~~
+/usr/include/stdlib.h:442:25: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  442 |                         size_t __statelen,
+      |                         ^~~~~~
+/usr/include/stdlib.h:540:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  540 | extern void *malloc (size_t __size) __THROW __attribute_malloc__
+      |                      ^~~~~~
+/usr/include/stdlib.h:543:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |                      ^~~~~~
+/usr/include/stdlib.h:543:38: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |                                      ^~~~~~
+/usr/include/stdlib.h:551:36: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  551 | extern void *realloc (void *__ptr, size_t __size)
+      |                                    ^~~~~~
+/usr/include/stdlib.h:563:41: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  563 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                         ^~~~~~
+/usr/include/stdlib.h:563:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  563 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                                         ^~~~~~
+/usr/include/stdlib.h:569:41: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  569 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                         ^~~~~~
+/usr/include/stdlib.h:569:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  569 | extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+      |                                                         ^~~~~~
+In file included from /usr/include/stdlib.h:574,
+                 from story-step4.c:4:
+/usr/include/alloca.h:32:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   32 | extern void *alloca (size_t __size) __THROW;
+      |                      ^~~~~~
+In file included from story-step4.c:4:
+/usr/include/stdlib.h:580:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  580 | extern void *valloc (size_t __size) __THROW __attribute_malloc__
+      |                      ^~~~~~
+/usr/include/stdlib.h:586:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  586 | extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:586:65: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  586 | extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+      |                                                                 ^~~~~~
+/usr/include/stdlib.h:829:23: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  829 |                       size_t __nmemb, size_t __size, __compar_fn_t __compar)
+      |                       ^~~~~~
+/usr/include/stdlib.h:829:39: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  829 |                       size_t __nmemb, size_t __size, __compar_fn_t __compar)
+      |                                       ^~~~~~
+/usr/include/stdlib.h:838:34: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  838 | extern void qsort (void *__base, size_t __nmemb, size_t __size,
+      |                                  ^~~~~~
+/usr/include/stdlib.h:838:50: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  838 | extern void qsort (void *__base, size_t __nmemb, size_t __size,
+      |                                                  ^~~~~~
+/usr/include/stdlib.h:912:20: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  912 |                    size_t __len) __THROW __nonnull ((3, 4, 5));
+      |                    ^~~~~~
+/usr/include/stdlib.h:915:20: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  915 |                    size_t __len) __THROW __nonnull ((3, 4, 5));
+      |                    ^~~~~~
+/usr/include/stdlib.h:919:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  919 |                     char *__restrict __buf, size_t __len)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:923:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  923 |                     char *__restrict __buf, size_t __len)
+      |                                             ^~~~~~
+/usr/include/stdlib.h:930:36: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  930 | extern int mblen (const char *__s, size_t __n) __THROW;
+      |                                    ^~~~~~
+/usr/include/stdlib.h:934:48: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  934 |                    const char *__restrict __s, size_t __n) __THROW;
+      |                                                ^~~~~~
+/usr/include/stdlib.h:941:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘mbstowcs’
+  941 | extern size_t mbstowcs (wchar_t *__restrict  __pwcs,
+      |               ^~~~~~~~
+/usr/include/stdlib.h:945:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘wcstombs’
+  945 | extern size_t wcstombs (char *__restrict __s,
+      |               ^~~~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:44:22: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   44 |                      size_t __n) __THROW __nonnull ((1, 2));
+      |                      ^~~~~~
+/usr/include/string.h:47:56: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   47 | extern void *memmove (void *__dest, const void *__src, size_t __n)
+      |                                                        ^~~~~~
+/usr/include/string.h:55:32: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   55 |                       int __c, size_t __n)
+      |                                ^~~~~~
+/usr/include/string.h:61:42: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   61 | extern void *memset (void *__s, int __c, size_t __n) __THROW __nonnull ((1));
+      |                                          ^~~~~~
+/usr/include/string.h:64:56: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   64 | extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+      |                                                        ^~~~~~
+/usr/include/string.h:80:60: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   80 | extern int __memcmpeq (const void *__s1, const void *__s2, size_t __n)
+      |                                                            ^~~~~~
+/usr/include/string.h:107:48: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  107 | extern void *memchr (const void *__s, int __c, size_t __n)
+      |                                                ^~~~~~
+/usr/include/string.h:145:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  145 |                       const char *__restrict __src, size_t __n)
+      |                                                     ^~~~~~
+/usr/include/string.h:153:23: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  153 |                       size_t __n) __THROW __nonnull ((1, 2));
+      |                       ^~~~~~
+/usr/include/string.h:159:57: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  159 | extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+      |                                                         ^~~~~~
+/usr/include/string.h:166:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strxfrm’
+  166 | extern size_t strxfrm (char *__restrict __dest,
+      |               ^~~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:179:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strxfrm_l’
+  179 | extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
+      |               ^~~~~~~~~
+/usr/include/string.h:195:45: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  195 | extern char *strndup (const char *__string, size_t __n)
+      |                                             ^~~~~~
+/usr/include/string.h:293:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strcspn’
+  293 | extern size_t strcspn (const char *__s, const char *__reject)
+      |               ^~~~~~~
+/usr/include/string.h:297:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strspn’
+  297 | extern size_t strspn (const char *__s, const char *__accept)
+      |               ^~~~~~
+/usr/include/string.h:407:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strlen’
+  407 | extern size_t strlen (const char *__s)
+      |               ^~~~~~
+/usr/include/string.h:413:15: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘strnlen’
+  413 | extern size_t strnlen (const char *__string, size_t __maxlen)
+      |               ^~~~~~~
+In file included from /usr/include/features.h:486,
+                 from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33,
+                 from /usr/include/limits.h:26,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:203,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:7,
+                 from /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:34,
+                 from story-step4.c:2:
+/usr/include/string.h:432:12: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  432 | extern int __REDIRECT_NTH (strerror_r,
+      |            ^~~~~~~~~~~~~~
+In file included from /usr/include/string.h:462,
+                 from story-step4.c:5:
+/usr/include/strings.h:34:54: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   34 | extern int bcmp (const void *__s1, const void *__s2, size_t __n)
+      |                                                      ^~~~~~
+/usr/include/strings.h:38:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   38 | extern void bcopy (const void *__src, void *__dest, size_t __n)
+      |                                                     ^~~~~~
+/usr/include/strings.h:42:31: error: expected declaration specifiers or ‘...’ before ‘size_t’
+   42 | extern void bzero (void *__s, size_t __n) __THROW __nonnull ((1));
+      |                               ^~~~~~
+/usr/include/strings.h:120:61: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  120 | extern int strncasecmp (const char *__s1, const char *__s2, size_t __n)
+      |                                                             ^~~~~~
+/usr/include/strings.h:134:27: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  134 |                           size_t __n, locale_t __loc)
+      |                           ^~~~~~
+In file included from story-step4.c:5:
+/usr/include/string.h:466:40: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  466 | extern void explicit_bzero (void *__s, size_t __n) __THROW __nonnull ((1))
+      |                                        ^~~~~~
+/usr/include/string.h:497:55: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  497 |                         const char *__restrict __src, size_t __n)
+      |                                                       ^~~~~~
+/usr/include/string.h:500:53: error: expected declaration specifiers or ‘...’ before ‘size_t’
+  500 |                       const char *__restrict __src, size_t __n)
+      |                                                     ^~~~~~
+In file included from rand_story.h:10,
+                 from story-step4.c:7:
+provided.h:9:3: error: expected specifier-qualifier-list before ‘size_t’
+    9 |   size_t n_words;
+      |   ^~~~~~
+provided.h:15:3: error: expected specifier-qualifier-list before ‘size_t’
+   15 |   size_t n;
+      |   ^~~~~~
+story-step4.c: In function ‘main’:
+story-step4.c:38:31: error: implicit declaration of function ‘malloc’ [-Werror=implicit-function-declaration]
+   38 |     category_t * back_words = malloc(sizeof(*back_words));
+      |                               ^~~~~~
+story-step4.c:8:1: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+    7 | #include "rand_story.h"
+  +++ |+#include <stdlib.h>
+    8 |     // use the header files from eval 1
+story-step4.c:38:31: error: incompatible implicit declaration of built-in function ‘malloc’ [-Werror=builtin-declaration-mismatch]
+   38 |     category_t * back_words = malloc(sizeof(*back_words));
+      |                               ^~~~~~
+story-step4.c:38:31: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+story-step4.c:40:17: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+   40 |     back_words->n_words = 0;
+      |                 ^~~~~~~
+      |                 words
+story-step4.c:41:44: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+   41 |     back_words->words = malloc(back_words->n_words * sizeof(*back_words->words));
+      |                                            ^~~~~~~
+      |                                            words
+story-step4.c:46:11: error: expected ‘;’ before ‘sz’
+   46 |     size_t sz = 0;
+      |           ^~~
+      |           ;
+story-step4.c:48:12: error: implicit declaration of function ‘getline’ [-Werror=implicit-function-declaration]
+   48 |     while (getline(&line, &sz, f_story) >= 0) {
+      |            ^~~~~~~
+story-step4.c:48:28: error: ‘sz’ undeclared (first use in this function)
+   48 |     while (getline(&line, &sz, f_story) >= 0) {
+      |                            ^~
+story-step4.c:48:28: note: each undeclared identifier is reported only once for each function it appears in
+story-step4.c:49:13: error: expected ‘;’ before ‘len’
+   49 |       size_t len = strlen(line);
+      |             ^~~~
+      |             ;
+story-step4.c:53:18: error: expected ‘;’ before ‘i’
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                  ^~
+      |                  ;
+story-step4.c:53:26: error: ‘i’ undeclared (first use in this function)
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                          ^
+story-step4.c:53:30: error: ‘len’ undeclared (first use in this function)
+   53 |       for (size_t i = 0; i < len; i++) {
+      |                              ^~~
+story-step4.c:70:17: error: expected ‘;’ before ‘count’
+   70 |           size_t count = 1;
+      |                 ^~~~~~
+      |                 ;
+story-step4.c:71:22: error: implicit declaration of function ‘realloc’ [-Werror=implicit-function-declaration]
+   71 |           cat_name = realloc(cat_name, count * sizeof(*cat_name));
+      |                      ^~~~~~~
+story-step4.c:71:22: note: include ‘<stdlib.h>’ or provide a declaration of ‘realloc’
+story-step4.c:71:22: error: incompatible implicit declaration of built-in function ‘realloc’ [-Werror=builtin-declaration-mismatch]
+story-step4.c:71:22: note: include ‘<stdlib.h>’ or provide a declaration of ‘realloc’
+story-step4.c:71:40: error: ‘count’ undeclared (first use in this function); did you mean ‘_count’?
+   71 |           cat_name = realloc(cat_name, count * sizeof(*cat_name));
+      |                                        ^~~~~
+      |                                        _count
+story-step4.c:92:17: error: expected ‘;’ before ‘int_count’
+   92 |           size_t int_count = 1;
+      |                 ^~~~~~~~~~
+      |                 ;
+story-step4.c:93:38: error: ‘int_count’ undeclared (first use in this function); did you mean ‘_count’?
+   93 |           cat_int = realloc(cat_int, int_count * sizeof(*cat_int));
+      |                                      ^~~~~~~~~
+      |                                      _count
+story-step4.c:131:15: error: implicit declaration of function ‘strlen’ [-Werror=implicit-function-declaration]
+  131 |           if (strlen(cat_int) > 0) {
+      |               ^~~~~~
+story-step4.c:8:1: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+    7 | #include "rand_story.h"
+  +++ |+#include <string.h>
+    8 |     // use the header files from eval 1
+story-step4.c:131:15: error: incompatible implicit declaration of built-in function ‘strlen’ [-Werror=builtin-declaration-mismatch]
+  131 |           if (strlen(cat_int) > 0) {
+      |               ^~~~~~
+story-step4.c:131:15: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+story-step4.c:132:19: error: expected ‘;’ before ‘back_int’
+  132 |             size_t back_int = atoi(cat_int);
+      |                   ^~~~~~~~~
+      |                   ;
+story-step4.c:134:17: error: ‘back_int’ undeclared (first use in this function)
+  134 |             if (back_int >= 1) {
+      |                 ^~~~~~~~
+story-step4.c:135:42: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  135 |               if (back_int > back_words->n_words) {
+      |                                          ^~~~~~~
+      |                                          words
+story-step4.c:142:66: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  142 |                 curr_back = strdup(back_words->words[back_words->n_words - back_int]);
+      |                                                                  ^~~~~~~
+      |                                                                  words
+story-step4.c:146:29: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  146 |                 back_words->n_words++;
+      |                             ^~~~~~~
+      |                             words
+story-step4.c:148:52: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  148 |                     back_words->words, back_words->n_words * sizeof(*back_words->words));
+      |                                                    ^~~~~~~
+      |                                                    words
+story-step4.c:149:47: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  149 |                 back_words->words[back_words->n_words - 1] = strdup(curr_back);
+      |                                               ^~~~~~~
+      |                                               words
+story-step4.c:160:24: error: expected ‘;’ before ‘i’
+  160 |             for (size_t i = 0; i < cat_array->n; i++) {
+      |                        ^~
+      |                        ;
+story-step4.c:160:45: error: ‘catarray_t’ {aka ‘struct catarray_tag’} has no member named ‘n’
+  160 |             for (size_t i = 0; i < cat_array->n; i++) {
+      |                                             ^~
+story-step4.c:162:28: error: expected ‘;’ before ‘j’
+  162 |                 for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+      |                            ^~
+      |                            ;
+story-step4.c:162:36: error: ‘j’ undeclared (first use in this function)
+  162 |                 for (size_t j = 0; j < cat_array->arr[i].n_words; j++) {
+      |                                    ^
+story-step4.c:164:32: error: expected ‘;’ before ‘h’
+  164 |                     for (size_t h = j; h < cat_array->arr[i].n_words - 1; h++) {
+      |                                ^~
+      |                                ;
+story-step4.c:164:40: error: ‘h’ undeclared (first use in this function)
+  164 |                     for (size_t h = j; h < cat_array->arr[i].n_words - 1; h++) {
+      |                                        ^
+story-step4.c:180:25: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  180 |             back_words->n_words++;
+      |                         ^~~~~~~
+      |                         words
+story-step4.c:182:53: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  182 |                                         back_words->n_words * sizeof(*back_words->words));
+      |                                                     ^~~~~~~
+      |                                                     words
+story-step4.c:183:43: error: ‘category_t’ {aka ‘struct category_tag’} has no member named ‘n_words’; did you mean ‘words’?
+  183 |             back_words->words[back_words->n_words - 1] = strdup(curr_word);
+      |                                           ^~~~~~~
+      |                                           words
+cc1: all warnings being treated as errors
+make: *** [Makefile:8: story-step4.o] Error 1
+make: Target 'all' not remade because of errors.
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+~/ece551/060_eval2 $ ./story-step4 -n words.txt story2.txt 
+Once upon a time, there was a walrus. This walrus lived in a very
+scary cave. One day, it left its scary cave and met a dragon.
+~/ece551/060_eval2 $ valgrind ./story-step4 -n words.txt story2.txt
+==3706084== Memcheck, a memory error detector
+==3706084== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3706084== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3706084== Command: ./story-step4 -n words.txt story2.txt
+==3706084== 
+Once upon a time, there was a walrus. This walrus lived in a very
+==3706084== Invalid read of size 1
+==3706084==    at 0x484FBD7: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109A58: main (story-step4.c:163)
+==3706084==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484FBF0: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109A58: main (story-step4.c:163)
+==3706084==  Address 0x4a90d61 is 1 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484ED76: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+OB==3706084==    by 0x48D9DB0: __vfprintf_internal (vfprintf-internal.c:1517)
+==3706084==    by 0x48C381E: printf (printf.c:33)
+==3706084==    by 0x109C5D: main (story-step4.c:178)
+==3706084==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484ED84: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x48D9DB0: __vfprintf_internal (vfprintf-internal.c:1517)
+==3706084==    by 0x48C381E: printf (printf.c:33)
+==3706084==    by 0x109C5D: main (story-step4.c:178)
+==3706084==  Address 0x4a90d61 is 1 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x48EE7B4: _IO_new_file_xsputn (fileops.c:1218)
+==3706084==    by 0x48EE7B4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3706084==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3706084==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3706084==    by 0x48C381E: printf (printf.c:33)
+==3706084==    by 0x109C5D: main (story-step4.c:178)
+==3706084==  Address 0x4a90d67 is 7 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x48534C8: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x48EE6E4: _IO_new_file_xsputn (fileops.c:1235)
+==3706084==    by 0x48EE6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3706084==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3706084==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3706084==    by 0x48C381E: printf (printf.c:33)
+==3706084==    by 0x109C5D: main (story-step4.c:178)
+==3706084==  Address 0x4a90d67 is 7 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x48534D6: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x48EE6E4: _IO_new_file_xsputn (fileops.c:1235)
+==3706084==    by 0x48EE6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3706084==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3706084==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3706084==    by 0x48C381E: printf (printf.c:33)
+==3706084==    by 0x109C5D: main (story-step4.c:178)
+==3706084==  Address 0x4a90d65 is 5 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484ED76: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B602: strdup (strdup.c:41)
+==3706084==    by 0x109CC4: main (story-step4.c:183)
+==3706084==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484ED84: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B602: strdup (strdup.c:41)
+==3706084==    by 0x109CC4: main (story-step4.c:183)
+==3706084==  Address 0x4a90d61 is 1 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 8
+==3706084==    at 0x484FF0D: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109CC4: main (story-step4.c:183)
+==3706084==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+==3706084== Invalid read of size 1
+==3706084==    at 0x484FF90: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109CC4: main (story-step4.c:183)
+==3706084==  Address 0x4a90d68 is 8 bytes inside a block of size 9 free'd
+==3706084==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x109AA8: main (story-step4.c:166)
+==3706084==  Block was alloc'd at
+==3706084==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3706084==    by 0x490B60E: strdup (strdup.c:42)
+==3706084==    by 0x10A2EC: get_catarray_t (rand_story.c:116)
+==3706084==    by 0x109523: main (story-step4.c:34)
+==3706084== 
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3706084== 
+==3706084== HEAP SUMMARY:
+==3706084==     in use at exit: 28 bytes in 4 blocks
+==3706084==   total heap usage: 200 allocs, 196 frees, 11,797 bytes allocated
+==3706084== 
+==3706084== LEAK SUMMARY:
+==3706084==    definitely lost: 28 bytes in 4 blocks
+==3706084==    indirectly lost: 0 bytes in 0 blocks
+==3706084==      possibly lost: 0 bytes in 0 blocks
+==3706084==    still reachable: 0 bytes in 0 blocks
+==3706084==         suppressed: 0 bytes in 0 blocks
+==3706084== Rerun with --leak-check=full to see details of leaked memory
+==3706084== 
+==3706084== For lists of detected and suppressed errors, rerun with: -s
+==3706084== ERROR SUMMARY: 42 errors from 11 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+~/ece551/060_eval2 $ ./story-step4 -n words.txt story2.txt 
+Once upon a time, there was a ?��U. This ?��U lived in a very
+scary ?��U. One day, it left its scary ?��U and met a �8��U.
+~/ece551/060_eval2 $ valgrind ./story-step4 -n words.txt story2.txt
+==3756708== Memcheck, a memory error detector
+==3756708== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3756708== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3756708== Command: ./story-step4 -n words.txt story2.txt
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484ED76: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x48D9DB0: __vfprintf_internal (vfprintf-internal.c:1517)
+==3756708==    by 0x48C381E: printf (printf.c:33)
+==3756708==    by 0x109CB7: main (story-step4.c:179)
+==3756708==  Address 0x4a900f0 is 0 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484ED84: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x48D9DB0: __vfprintf_internal (vfprintf-internal.c:1517)
+==3756708==    by 0x48C381E: printf (printf.c:33)
+==3756708==    by 0x109CB7: main (story-step4.c:179)
+==3756708==  Address 0x4a900f1 is 1 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x48EE7B4: _IO_new_file_xsputn (fileops.c:1218)
+==3756708==    by 0x48EE7B4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3756708==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3756708==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3756708==    by 0x48C381E: printf (printf.c:33)
+==3756708==    by 0x109CB7: main (story-step4.c:179)
+==3756708==  Address 0x4a900f5 is 5 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x48534C8: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x48EE6E4: _IO_new_file_xsputn (fileops.c:1235)
+==3756708==    by 0x48EE6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3756708==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3756708==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3756708==    by 0x48C381E: printf (printf.c:33)
+==3756708==    by 0x109CB7: main (story-step4.c:179)
+==3756708==  Address 0x4a900f5 is 5 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x48534D6: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x48EE6E4: _IO_new_file_xsputn (fileops.c:1235)
+==3756708==    by 0x48EE6E4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==3756708==    by 0x48DA08B: outstring_func (vfprintf-internal.c:239)
+==3756708==    by 0x48DA08B: __vfprintf_internal (vfprintf-internal.c:1517)
+==3756708==    by 0x48C381E: printf (printf.c:33)
+==3756708==    by 0x109CB7: main (story-step4.c:179)
+==3756708==  Address 0x4a900f3 is 3 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484ED76: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B602: strdup (strdup.c:41)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a900f0 is 0 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484ED84: __strlen_sse2 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B602: strdup (strdup.c:41)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a900f1 is 1 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 2
+==3756708==    at 0x484FF60: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a900f0 is 0 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 2
+==3756708==    at 0x484FF6F: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a900f4 is 4 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484FF90: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a900f6 is 6 bytes inside a block of size 7 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109BDB: main (story-step4.c:171)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A2C9: get_catarray_t (rand_story.c:99)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+Once upon a time, there was a walrus. This walrus lived in a very
+==3756708== Invalid read of size 1
+==3756708==    at 0x484FBD7: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109A58: main (story-step4.c:163)
+==3756708==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109AA8: main (story-step4.c:166)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A346: get_catarray_t (rand_story.c:116)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 1
+==3756708==    at 0x484FBF0: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109A58: main (story-step4.c:163)
+==3756708==  Address 0x4a90d61 is 1 bytes inside a block of size 9 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109AA8: main (story-step4.c:166)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A346: get_catarray_t (rand_story.c:116)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+==3756708== Invalid read of size 8
+==3756708==    at 0x484FF0D: memcpy@GLIBC_2.2.5 (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109D1E: main (story-step4.c:184)
+==3756708==  Address 0x4a90d60 is 0 bytes inside a block of size 9 free'd
+==3756708==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x109AA8: main (story-step4.c:166)
+==3756708==  Block was alloc'd at
+==3756708==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3756708==    by 0x490B60E: strdup (strdup.c:42)
+==3756708==    by 0x10A346: get_catarray_t (rand_story.c:116)
+==3756708==    by 0x109523: main (story-step4.c:34)
+==3756708== 
+peculiar cave. One day, it left its peculiar cave and met a dragon.
+==3756708== 
+==3756708== HEAP SUMMARY:
+==3756708==     in use at exit: 0 bytes in 0 blocks
+==3756708==   total heap usage: 200 allocs, 200 frees, 11,797 bytes allocated
+==3756708== 
+==3756708== All heap blocks were freed -- no leaks are possible
+==3756708== 
+==3756708== For lists of detected and suppressed errors, rerun with: -s
+==3756708== ERROR SUMMARY: 123 errors from 13 contexts (suppressed: 0 from 0)
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+~/ece551/060_eval2 $ ./story-step4 -n words.txt story2.txt 
+Once upon a time, there was a Y�x*�U. This Y�x*�U lived in a very
+Y�x*�U Y�x*�U. One day, it left its Y�x*�U Y�x*�U and met a ��x*�U.
+~/ece551/060_eval2 $ 
+~/ece551/060_eval2 $ make -k
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+~/ece551/060_eval2 $ ./story-step4 -n words.txt story2.txt
